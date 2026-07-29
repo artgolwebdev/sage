@@ -365,6 +365,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowLeft') showPrevImage();
     });
 
+    // --- Global WhatsApp CTA Visibility (Hidden on Hero, Visible on all other sections) ---
+    const globalCta = document.querySelector('.global-cta');
+    const heroSection = document.getElementById('hero');
+
+    if (globalCta && heroSection) {
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // When hero section is intersecting, hide CTA button; show on all other sections
+                if (entry.isIntersecting) {
+                    globalCta.classList.remove('visible');
+                    document.body.classList.remove('cta-visible');
+                } else {
+                    globalCta.classList.add('visible');
+                    document.body.classList.add('cta-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        heroObserver.observe(heroSection);
+    }
+
+    // --- Cookie Policy Banner Logic ---
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
+
+    if (cookieBanner && cookieAcceptBtn) {
+        // Show banner if consent hasn't been saved yet
+        if (!localStorage.getItem('sage_cookie_consent')) {
+            setTimeout(() => {
+                cookieBanner.classList.remove('hidden');
+            }, 600);
+        }
+
+        cookieAcceptBtn.addEventListener('click', () => {
+            cookieBanner.classList.add('hidden');
+            localStorage.setItem('sage_cookie_consent', 'accepted');
+        });
+    }
+
     // Initialize
     updateProgress();
 });
