@@ -411,7 +411,9 @@ video {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
     scrollbar-width: none;
     -ms-overflow-style: none;
     user-select: none;
@@ -433,7 +435,7 @@ video {
 }
 
 .review-card {
-    flex: 0 0 100%;
+    flex: 0 0 calc(100% - 4rem);
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;

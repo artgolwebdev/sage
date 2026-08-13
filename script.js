@@ -527,18 +527,26 @@ document.addEventListener('DOMContentLoaded', () => {
         let isPointerDown = false;
         let dragStartX = 0;
         let dragStartScrollLeft = 0;
+        let resumeTimeout = null;
+
+        function scheduleAutoScroll() {
+            clearTimeout(resumeTimeout);
+            resumeTimeout = setTimeout(startAutoScroll, 8000);
+        }
 
         reviewsSlider.addEventListener('pointerdown', (e) => {
             isPointerDown = true;
             dragStartX = e.clientX;
             dragStartScrollLeft = reviewsSlider.scrollLeft;
-            reviewsSlider.setPointerCapture(e.pointerId);
+            if (e.pointerType === 'mouse') {
+                reviewsSlider.setPointerCapture(e.pointerId);
+            }
             reviewsSlider.style.scrollBehavior = 'auto';
             stopAutoScroll();
         });
 
         reviewsSlider.addEventListener('pointermove', (e) => {
-            if (!isPointerDown) return;
+            if (!isPointerDown || e.pointerType !== 'mouse') return;
             reviewsSlider.scrollLeft = dragStartScrollLeft - (e.clientX - dragStartX);
         });
 
@@ -549,13 +557,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 reviewsSlider.releasePointerCapture(e.pointerId);
             }
             reviewsSlider.style.scrollBehavior = '';
-            startAutoScroll();
+            scheduleAutoScroll();
         }
 
         reviewsSlider.addEventListener('pointerup', endReviewsDrag);
         reviewsSlider.addEventListener('pointercancel', endReviewsDrag);
         reviewsSlider.addEventListener('mouseenter', stopAutoScroll);
-        reviewsSlider.addEventListener('mouseleave', startAutoScroll);
+        reviewsSlider.addEventListener('mouseleave', scheduleAutoScroll);
 
         startAutoScroll();
     }

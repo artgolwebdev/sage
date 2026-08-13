@@ -30,8 +30,9 @@ Static single-page site for **SAGE Tattoo Studio** (Tel Aviv-Yaffo), deployed on
 - Phone / WhatsApp: +972 52 650 4348
 - Booking link: `https://wa.me/972526504348?text=...`
 - Instagram: `@sage.tattooshop` (studio), `@groc08` (artist)
-- Google reviews (write): `https://www.google.com/search?q=google+reviews+sage+tatto#lrd=0x151d4d12ba6989ff:0xd269033be81a36b4,3,,,,`
-- Google reviews (view all): same URL with `,1,,,,`
+- Google Place ID: `ChIJ_4lpuhJNHRURtDYa6DsDadI` (SAGE TATTOO SHOP; FID `0x151d4d12ba6989ff:0xd269033be81a36b4`)
+- Google reviews (write): `https://search.google.com/local/writereview?placeid=ChIJ_4lpuhJNHRURtDYa6DsDadI`
+- Google reviews (view all, mobile-optimized search): Google Search results URL for `sage tattoo shop reviews` with the `si=` business token + `#ebo=1` fragment (see `index.html` → "See all Google Reviews")
 
 ## Development
 
