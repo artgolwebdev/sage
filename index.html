@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAGE | Tattoo & Piercing Studio | Tel Aviv-Yaffo</title>
-    <meta name="description" content="SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
+    <title>SAGE Tattoo Studio in Tel Aviv | Tattoo & Piercing Shop</title>
+    <meta name="description"
+        content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
+    <link rel="canonical" href="https://sagetattoo.shop/">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:site_name" content="SAGE Tattoo Studio Tel Aviv">
+    <meta property="og:title" content="SAGE Tattoo Studio in Tel Aviv | Tattoo & Piercing Shop">
+    <meta property="og:description"
+        content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
+    <meta property="og:url" content="https://sagetattoo.shop/">
+    <meta property="og:image" content="https://sagetattoo.shop/assets/images/1.jpg">
+    <meta property="og:image:width" content="1170">
+    <meta property="og:image:height" content="1560">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SAGE Tattoo Studio in Tel Aviv | Tattoo & Piercing Shop">
+    <meta name="twitter:description"
+        content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
+    <meta name="twitter:image" content="https://sagetattoo.shop/assets/images/1.jpg">
     <!-- Google Fonts: Bebas Neue for display, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3FE88WPKJ"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-N3FE88WPKJ');
+        gtag('config', 'G-N3FE88WPKJ');
+    </script>
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TattooParlor",
+        "name": "SAGE",
+        "description": "SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.",
+        "url": "https://sagetattoo.shop/",
+        "image": "https://sagetattoo.shop/assets/logo.png",
+        "telephone": "+972526504348",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Eilat Street 22",
+            "addressLocality": "Tel Aviv-Yaffo",
+            "addressCountry": "IL"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 32.05710607396655,
+            "longitude": 34.76214307559135
+        },
+        "sameAs": [
+            "https://www.instagram.com/sage.tattooshop/"
+        ]
+    }
     </script>
 </head>
+
 <body>
     <!-- Preloader -->
     <div id="preloader">
         <div class="preloader-content">
-            <h2 class="preloader-title">SAGE</h2>
+            <div class="preloader-title">SAGE</div>
             <div class="preloader-bar">
                 <div class="preloader-progress" id="preloader-progress"></div>
             </div>
@@ -33,9 +82,8 @@
     </div>
 
     <!-- 1. Hero Section -->
-    <section class="hero" id="hero">
+    <header class="hero" id="hero">
         <video class="hero-video" id="hero-bg-video" autoplay muted loop playsinline poster="assets/images/1.jpg">
-            <source src="assets/videos/1.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
 
@@ -50,14 +98,18 @@
         </div>
 
         <div class="hero-content">
-            <img src="assets/logo.png" alt="SAGE Logo Mark" class="hero-logo-mark" id="hero-img">
+            <img src="assets/logo.png" alt="SAGE Tattoo Studio Tel Aviv logo" class="hero-logo-mark" id="hero-img"
+                width="839" height="847">
             <h1 class="hero-title">SAGE</h1>
+            <span class="sr-only">Tattoo Studio in Tel Aviv</span>
         </div>
         <div class="scroll-indicator">
             <span>SCROLL</span>
             <div class="line"></div>
         </div>
-    </section>
+    </header>
+
+    <main>
 
     <!-- 2. About Strip -->
     <section class="about-strip" id="about">
@@ -73,30 +125,51 @@
         <div class="marquee-container">
             <div class="marquee-content">
                 <!-- Images will be duplicated for infinite scroll effect -->
-                <img src="assets/images/1.jpg" alt="Gallery Image 1" loading="lazy">
-                <img src="assets/images/2.jpg" alt="Gallery Image 2" loading="lazy">
-                <img src="assets/images/3.jpg" alt="Gallery Image 3" loading="lazy">
-                <img src="assets/images/4.jpg" alt="Gallery Image 4" loading="lazy">
-                <img src="assets/images/5.jpg" alt="Gallery Image 5" loading="lazy">
-                <img src="assets/images/7.jpg" alt="Gallery Image 7" loading="lazy">
-                <img src="assets/images/8.jpg" alt="Gallery Image 8" loading="lazy">
-                <img src="assets/images/9.jpg" alt="Gallery Image 9" loading="lazy">
-                <img src="assets/images/10.jpg" alt="Gallery Image 10" loading="lazy">
+                <img src="assets/images/1.jpg" alt="Close-up tattoo ink work by SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/2.jpg" alt="Detailed tattoo line work by SAGE Tel Aviv" loading="lazy">
+                <img src="assets/images/3.jpg" alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo" loading="lazy">
+                <img src="assets/images/4.jpg" alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists" loading="lazy">
+                <img src="assets/images/5.jpg" alt="Tattoo artwork in progress at SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/7.jpg" alt="Tattoo portfolio piece from SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/8.jpg" alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv" loading="lazy">
+                <img src="assets/images/9.jpg" alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio" loading="lazy">
+                <img src="assets/images/10.jpg" alt="Tattoo portfolio piece from SAGE Tel Aviv" loading="lazy">
                 <!-- Duplicated for seamless loop -->
-                <img src="assets/images/1.jpg" alt="Gallery Image 1" loading="lazy">
-                <img src="assets/images/2.jpg" alt="Gallery Image 2" loading="lazy">
-                <img src="assets/images/3.jpg" alt="Gallery Image 3" loading="lazy">
-                <img src="assets/images/4.jpg" alt="Gallery Image 4" loading="lazy">
-                <img src="assets/images/5.jpg" alt="Gallery Image 5" loading="lazy">
-                <img src="assets/images/7.jpg" alt="Gallery Image 7" loading="lazy">
-                <img src="assets/images/8.jpg" alt="Gallery Image 8" loading="lazy">
-                <img src="assets/images/9.jpg" alt="Gallery Image 9" loading="lazy">
-                <img src="assets/images/10.jpg" alt="Gallery Image 10" loading="lazy">
+                <img src="assets/images/1.jpg" alt="Close-up tattoo ink work by SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/2.jpg" alt="Detailed tattoo line work by SAGE Tel Aviv" loading="lazy">
+                <img src="assets/images/3.jpg" alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo" loading="lazy">
+                <img src="assets/images/4.jpg" alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists" loading="lazy">
+                <img src="assets/images/5.jpg" alt="Tattoo artwork in progress at SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/7.jpg" alt="Tattoo portfolio piece from SAGE Tel Aviv studio" loading="lazy">
+                <img src="assets/images/8.jpg" alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv" loading="lazy">
+                <img src="assets/images/9.jpg" alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio" loading="lazy">
+                <img src="assets/images/10.jpg" alt="Tattoo portfolio piece from SAGE Tel Aviv" loading="lazy">
             </div>
         </div>
     </section>
 
-    <!-- 4. Booking Form -->
+    <!-- 4. Reviews -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">WHAT CLIENTS SAY</h2>
+            <div class="reviews-slider" id="reviews-slider">
+                <div class="reviews-track" id="reviews-track"></div>
+            </div>
+            <div class="reviews-controls">
+                <button type="button" class="reviews-nav reviews-prev" id="reviews-prev"
+                    aria-label="Previous reviews">&#10094;</button>
+                <a href="https://www.google.com/search?q=google+reviews+sage+tatto&oq=google+reviews+sage+tatto&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRhA0gEINzM5MWowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x151d4d12ba6989ff:0xd269033be81a36b4,3,,,,"
+                    target="_blank" rel="noopener noreferrer" class="reviews-link reviews-link-primary">Leave us a
+                    Google Review</a>
+                <a href="https://www.google.com/search?q=google+reviews+sage+tatto&oq=google+reviews+sage+tatto&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRhA0gEINzM5MWowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x151d4d12ba6989ff:0xd269033be81a36b4,1,,,,"
+                    target="_blank" rel="noopener noreferrer" class="reviews-link">See all Google Reviews</a>
+                <button type="button" class="reviews-nav reviews-next" id="reviews-next"
+                    aria-label="Next reviews">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Booking Form -->
     <section class="booking-section" id="booking">
         <div class="container">
             <h2 class="section-title">BOOK AN APPOINTMENT</h2>
@@ -121,7 +194,8 @@
                             <button type="button" class="chip" data-value="Neck">Neck</button>
                             <button type="button" class="chip" data-value="Other">Other</button>
                         </div>
-                        <input type="text" id="placement-other" class="text-input hidden" placeholder="Specify placement...">
+                        <input type="text" id="placement-other" class="text-input hidden"
+                            placeholder="Specify placement...">
                         <div class="form-actions">
                             <button type="button" class="btn next-btn" disabled>Next</button>
                         </div>
@@ -146,7 +220,8 @@
                     <div class="form-step" id="step-3">
                         <h3>Your Name</h3>
                         <div class="input-group">
-                            <input type="text" id="client-name" class="text-input" placeholder="Enter your name" required>
+                            <input type="text" id="client-name" class="text-input" placeholder="Enter your name"
+                                required>
                         </div>
                         <div class="form-actions">
                             <button type="button" class="btn btn-outline prev-btn">Back</button>
@@ -172,7 +247,7 @@
         </div>
     </section>
 
-    <!-- 5. Contact Section -->
+    <!-- 6. Contact Section -->
     <section class="contact-section" id="contact">
         <div class="container contact-grid">
             <div class="contact-info">
@@ -180,42 +255,56 @@
                 <div class="contact-details">
                     <p class="address">Eilat Street 22<br>Tel Aviv-Yaffo</p>
                     <p class="powered-by">Powered by SAGE</p>
-                    
+
                     <div class="contact-methods">
                         <p class="phone-label">Call or WhatsApp</p>
                         <div class="phone-actions">
-                            <a href="tel:+972526504348" class="contact-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <a href="tel:+972526504348" class="contact-link"
+                                aria-label="Call SAGE tattoo studio in Tel Aviv">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
                                 972526504348
                             </a>
                         </div>
                     </div>
 
                     <div class="social-link">
-                        <a href="https://www.instagram.com/sage.tattooshop/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        <a href="https://www.instagram.com/sage.tattooshop/" target="_blank" rel="noopener noreferrer"
+                            class="instagram-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
                             Follow @sage.tattooshop
                         </a>
                     </div>
                 </div>
             </div>
             <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.144976787948!2d34.76214307559135!3d32.05710607396655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b79decfccb87%3A0xb3cf51d275fcfa13!2sEilat%20St%2022%2C%20Tel%20Aviv-Yafo!5e0!3m2!1sen!2sil!4v1714470000000!5m2!1sen!2sil" 
-                    width="100%" 
-                    height="100%" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.144976787948!2d34.76214307559135!3d32.05710607396655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b79decfccb87%3A0xb3cf51d275fcfa13!2sEilat%20St%2022%2C%20Tel%20Aviv-Yafo!5e0!3m2!1sen!2sil!4v1714470000000!5m2!1sen!2sil"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </div>
     </section>
 
+    </main>
+
     <!-- Global CTA -->
-    <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo" class="global-cta" target="_blank" rel="noopener noreferrer" aria-label="Book on WhatsApp">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.487 1.333 5.006l-1.417 5.176 5.297-1.389c1.474.803 3.136 1.226 4.774 1.227h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.668-1.039-5.176-2.927-7.062a9.923 9.923 0 0 0-7.062-2.957zm0 1.835c4.49 0 8.152 3.66 8.153 8.149 0 2.179-.848 4.228-2.391 5.769a8.107 8.107 0 0 1-5.761 2.391c-1.393 0-2.761-.365-3.966-1.055l-.284-.162-3.138.822.837-3.056-.178-.283a8.12 8.12 0 0 1-1.246-4.391c0-4.49 3.663-8.15 8.153-8.151zm4.567 11.455c-.25-.125-1.478-.729-1.708-.812-.229-.083-.396-.125-.563.125-.167.25-.646.812-.792.979-.146.167-.292.188-.542.063-.25-.125-1.055-.389-2.01-1.24-.743-.663-1.245-1.482-1.39-1.732-.146-.25-.016-.385.11-.51.112-.112.25-.292.375-.438.125-.146.167-.25.25-.417.083-.167.042-.313-.021-.438-.063-.125-.563-1.354-.771-1.854-.203-.487-.41-.421-.563-.428l-.479-.008c-.167 0-.438.063-.667.313s-.875.854-.875 2.083c0 1.229.896 2.417 1.021 2.583.125.167 1.762 2.69 4.269 3.774 2.507 1.083 2.507.722 2.965.676.458-.046 1.478-.604 1.687-1.188.208-.583.208-1.083.146-1.188-.063-.104-.229-.167-.479-.292z"/></svg>
+    <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo" class="global-cta"
+        target="_blank" rel="noopener noreferrer" aria-label="Book a tattoo appointment via WhatsApp in Tel Aviv">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.487 1.333 5.006l-1.417 5.176 5.297-1.389c1.474.803 3.136 1.226 4.774 1.227h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.668-1.039-5.176-2.927-7.062a9.923 9.923 0 0 0-7.062-2.957zm0 1.835c4.49 0 8.152 3.66 8.153 8.149 0 2.179-.848 4.228-2.391 5.769a8.107 8.107 0 0 1-5.761 2.391c-1.393 0-2.761-.365-3.966-1.055l-.284-.162-3.138.822.837-3.056-.178-.283a8.12 8.12 0 0 1-1.246-4.391c0-4.49 3.663-8.15 8.153-8.151zm4.567 11.455c-.25-.125-1.478-.729-1.708-.812-.229-.083-.396-.125-.563.125-.167.25-.646.812-.792.979-.146.167-.292.188-.542.063-.25-.125-1.055-.389-2.01-1.24-.743-.663-1.245-1.482-1.39-1.732-.146-.25-.016-.385.11-.51.112-.112.25-.292.375-.438.125-.146.167-.25.25-.417.083-.167.042-.313-.021-.438-.063-.125-.563-1.354-.771-1.854-.203-.487-.41-.421-.563-.428l-.479-.008c-.167 0-.438.063-.667.313s-.875.854-.875 2.083c0 1.229.896 2.417 1.021 2.583.125.167 1.762 2.69 4.269 3.774 2.507 1.083 2.507.722 2.965.676.458-.046 1.478-.604 1.687-1.188.208-.583.208-1.083.146-1.188-.063-.104-.229-.167-.479-.292z" />
+        </svg>
         <span>Book on WhatsApp</span>
     </a>
 
@@ -237,4 +326,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

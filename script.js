@@ -1,8 +1,36 @@
+// --- Random hero background video ---
+const HERO_VIDEO_OPTIONS = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4'];
+const HERO_VIDEO_DIR = 'assets/videos/random/';
+const DEFAULT_HERO_VIDEO = HERO_VIDEO_OPTIONS[0];
+const heroVideo = document.getElementById('hero-bg-video');
+
+function setHeroVideoSource(src) {
+    if (!heroVideo) return;
+    while (heroVideo.firstChild) {
+        heroVideo.removeChild(heroVideo.firstChild);
+    }
+    const source = document.createElement('source');
+    source.src = src;
+    source.type = 'video/mp4';
+    source.addEventListener('error', () => {
+        if (src !== HERO_VIDEO_DIR + DEFAULT_HERO_VIDEO) {
+            setHeroVideoSource(HERO_VIDEO_DIR + DEFAULT_HERO_VIDEO);
+        }
+    });
+    heroVideo.appendChild(source);
+    heroVideo.load();
+}
+
+if (heroVideo) {
+    const randomIndex = Math.floor(Math.random() * HERO_VIDEO_OPTIONS.length);
+    setHeroVideoSource(HERO_VIDEO_DIR + HERO_VIDEO_OPTIONS[randomIndex]);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Preloader Logic ---
     const preloader = document.getElementById('preloader');
     const preloaderProgress = document.getElementById('preloader-progress');
-    
+
     const assetsToLoad = [
         { type: 'video', el: document.getElementById('hero-bg-video') },
         { type: 'video', el: document.getElementById('hero-cv-1') },
@@ -41,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePreloaderProgress();
             return;
         }
-        
+
         if (asset.type === 'video') {
             if (asset.el.readyState >= 3) { // HAVE_FUTURE_DATA
                 updatePreloaderProgress();
@@ -64,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const steps = document.querySelectorAll('.form-step');
     const progressIndicator = document.getElementById('progress-indicator');
     const progressText = document.getElementById('progress-text');
-    
+
     let currentStep = 1;
     const totalSteps = steps.length;
 
@@ -126,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chips.forEach(c => c.classList.remove('selected'));
                 // Add to clicked
                 chip.classList.add('selected');
-                
+
                 const val = chip.getAttribute('data-value');
                 formData[dataKey] = val;
 
@@ -213,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const marqueeContainer = document.querySelector('.marquee-container');
     const marqueeContent = document.querySelector('.marquee-content');
     const galleryImages = Array.from(marqueeContent.querySelectorAll('img'));
-    
+
     let currentTranslate = 0;
     let isDragging = false;
     let startX = 0;
@@ -231,9 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isDragging) {
             currentTranslate -= autoScrollSpeed;
         }
-        
+
         const halfWidth = getHalfWidth();
-        
+
         // Loop boundary checks
         if (currentTranslate <= -halfWidth) {
             currentTranslate += halfWidth;
@@ -280,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isDragging || !marqueeContainer.hasPointerCapture(e.pointerId)) return;
         const deltaX = e.clientX - startX;
         currentTranslate = prevTranslate + deltaX;
-        
+
         if (Math.abs(deltaX) > 5) {
             hasDragged = true;
         }
@@ -290,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isDragging) {
             marqueeContainer.releasePointerCapture(e.pointerId);
             resumeAutoScroll();
-            
+
             // Handle click/tap here because setPointerCapture suppresses native click events on children
             if (!hasDragged && clickTarget && clickTarget.tagName.toLowerCase() === 'img') {
                 const idx = galleryImages.indexOf(clickTarget);
@@ -300,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    
+
     marqueeContainer.addEventListener('pointercancel', (e) => {
         if (isDragging) {
             marqueeContainer.releasePointerCapture(e.pointerId);
@@ -314,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxClose = document.getElementById('lightbox-close');
     const lightboxPrev = document.getElementById('lightbox-prev');
     const lightboxNext = document.getElementById('lightbox-next');
-    
+
     let currentLightboxIndex = 0;
     const uniqueImages = galleryImages.slice(0, galleryImages.length / 2);
 
@@ -343,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     galleryImages.forEach((img) => {
         img.ondragstart = () => false; // Prevent native browser drag
     });
-    
+
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxPrev.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -353,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         showNextImage();
     });
-    
+
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
@@ -404,6 +432,132 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieBanner.classList.add('hidden');
             localStorage.setItem('sage_cookie_consent', 'accepted');
         });
+    }
+
+    // --- Reviews Slider Logic ---
+    const REVIEWS = [
+        { name: 'Sheena Strimling', rating: 5, text: "German is an absolute legend. Top-tier tattoo artist and logo designer with insane attention to detail. Amazing service, great vibes, and a clean, stylish studio. You feel comfortable from the first moment. Highly recommended" },
+        { name: 'ofek cohen', rating: 5, text: "The most professional in town. Special styles, pleasant approach, and a reasonable price. Not like all the other artists you're used to! These are real artists from the ground !" },
+        { name: 'ביג לידור', rating: 5, text: 'Studio of the highest level. The tattoo artist is simply an artist. He sat with me on the sketch, made sure everything was exactly as I wanted and the hygiene there was simply uncompromising.' },
+        { name: 'Concep.t', rating: 5, text: 'I got a tattoo and it came out just perfect 🔥 Rare service, precise work and a killer atmosphere. Thank you for the professional attitude and the result that I can\'t stop looking at, a huge thank you to German for professionalism on a level you don\'t see every day.' },
+        { name: 'lin tebul', rating: 5, text: 'A stunning place with people who are above expectations (; Attitude, service and professionalism 10/10 Many studios in Tel Aviv can learn from such service (: I will definitely come back and recommend (: ' },
+        { name: 'תומר דבש', rating: 5, text: 'Artistic, fair, talented and invested place. The staff is nice and smiling with a thousand patience. Very happy with the tattoo. I will be back next winter.' }
+    ];
+
+    const reviewsSlider = document.getElementById('reviews-slider');
+    const reviewsTrack = document.getElementById('reviews-track');
+    const reviewsPrev = document.getElementById('reviews-prev');
+    const reviewsNext = document.getElementById('reviews-next');
+
+    if (reviewsSlider && reviewsTrack && reviewsPrev && reviewsNext) {
+        const fragment = document.createDocumentFragment();
+
+        REVIEWS.forEach((review) => {
+            const card = document.createElement('article');
+            card.className = 'review-card';
+            card.setAttribute('dir', 'ltr');
+
+            const stars = document.createElement('div');
+            stars.className = 'review-stars';
+            stars.setAttribute('role', 'img');
+            stars.setAttribute('aria-label', `Rated ${review.rating} out of 5 stars`);
+            stars.textContent = '★'.repeat(review.rating);
+
+            const text = document.createElement('p');
+            text.className = 'review-text';
+            text.textContent = review.text;
+
+            const meta = document.createElement('footer');
+            meta.className = 'review-meta';
+
+            const name = document.createElement('span');
+            name.className = 'review-name';
+            name.setAttribute('dir', 'auto');
+            name.textContent = review.name;
+
+            const source = document.createElement('span');
+            source.className = 'review-source';
+            source.textContent = 'Google Review';
+
+            meta.appendChild(name);
+            meta.appendChild(source);
+            card.appendChild(stars);
+            card.appendChild(text);
+            card.appendChild(meta);
+            fragment.appendChild(card);
+        });
+
+        reviewsTrack.appendChild(fragment);
+
+        const pageStep = () => reviewsSlider.clientWidth;
+        const maxScroll = () => reviewsTrack.scrollWidth - reviewsSlider.clientWidth;
+
+        let autoScrollTimer = null;
+
+        function stopAutoScroll() {
+            if (autoScrollTimer) {
+                clearInterval(autoScrollTimer);
+                autoScrollTimer = null;
+            }
+        }
+
+        function startAutoScroll() {
+            stopAutoScroll();
+            autoScrollTimer = setInterval(() => {
+                if (reviewsSlider.scrollLeft >= maxScroll() - 2) {
+                    reviewsSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    reviewsSlider.scrollTo({ left: reviewsSlider.scrollLeft + pageStep(), behavior: 'smooth' });
+                }
+            }, 4000);
+        }
+
+        reviewsPrev.addEventListener('click', () => {
+            const target = Math.max(0, reviewsSlider.scrollLeft - pageStep());
+            reviewsSlider.scrollTo({ left: Math.min(target, maxScroll()), behavior: 'smooth' });
+            startAutoScroll();
+        });
+
+        reviewsNext.addEventListener('click', () => {
+            const target = Math.min(maxScroll(), reviewsSlider.scrollLeft + pageStep());
+            reviewsSlider.scrollTo({ left: target, behavior: 'smooth' });
+            startAutoScroll();
+        });
+
+        let isPointerDown = false;
+        let dragStartX = 0;
+        let dragStartScrollLeft = 0;
+
+        reviewsSlider.addEventListener('pointerdown', (e) => {
+            isPointerDown = true;
+            dragStartX = e.clientX;
+            dragStartScrollLeft = reviewsSlider.scrollLeft;
+            reviewsSlider.setPointerCapture(e.pointerId);
+            reviewsSlider.style.scrollBehavior = 'auto';
+            stopAutoScroll();
+        });
+
+        reviewsSlider.addEventListener('pointermove', (e) => {
+            if (!isPointerDown) return;
+            reviewsSlider.scrollLeft = dragStartScrollLeft - (e.clientX - dragStartX);
+        });
+
+        function endReviewsDrag(e) {
+            if (!isPointerDown) return;
+            isPointerDown = false;
+            if (reviewsSlider.hasPointerCapture(e.pointerId)) {
+                reviewsSlider.releasePointerCapture(e.pointerId);
+            }
+            reviewsSlider.style.scrollBehavior = '';
+            startAutoScroll();
+        }
+
+        reviewsSlider.addEventListener('pointerup', endReviewsDrag);
+        reviewsSlider.addEventListener('pointercancel', endReviewsDrag);
+        reviewsSlider.addEventListener('mouseenter', stopAutoScroll);
+        reviewsSlider.addEventListener('mouseleave', startAutoScroll);
+
+        startAutoScroll();
     }
 
     // Initialize

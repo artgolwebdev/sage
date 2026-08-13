@@ -2,13 +2,14 @@
     /* Colors */
     --bg-color: #0a0a0a;
     --text-color: #f4f4f4;
-    --accent-color: #8a9a86; /* Warm sage green */
+    --accent-color: #8a9a86;
+    /* Warm sage green */
     --border-color: #333333;
-    
+
     /* Typography */
     --font-display: 'Bebas Neue', sans-serif;
     --font-body: 'Inter', sans-serif;
-    
+
     /* Layout */
     --global-padding: 1.5rem;
     --max-width: 1200px;
@@ -21,13 +22,19 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    padding-bottom: var(--cta-height); /* Space for fixed CTA */
+    padding-bottom: var(--cta-height);
+    /* Space for fixed CTA */
 }
 
 a {
@@ -35,7 +42,8 @@ a {
     text-decoration: none;
 }
 
-img, video {
+img,
+video {
     max-width: 100%;
     display: block;
 }
@@ -133,7 +141,8 @@ img, video {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 10, 0.6); /* Dark overlay to make text/logo pop */
+    background-color: rgba(10, 10, 10, 0.6);
+    /* Dark overlay to make text/logo pop */
     z-index: 2;
 }
 
@@ -150,19 +159,28 @@ img, video {
 .hero-logo-mark {
     grid-area: 1 / 1;
     z-index: 1;
-    max-width: 180px;
+    width: 180px;
+    height: auto;
+    max-width: 100%;
     margin-bottom: 0;
     animation: spinLogo 30s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.65));
 }
 
 @keyframes spinLogo {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (min-width: 768px) {
     .hero-logo-mark {
-        max-width: 250px;
+        width: 250px;
+        max-width: 100%;
         margin-bottom: 0;
     }
 }
@@ -177,7 +195,7 @@ img, video {
     line-height: 0.8;
     letter-spacing: 0.05em;
     color: var(--text-color);
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Chaotic Overlay Videos */
@@ -196,42 +214,44 @@ img, video {
     position: absolute;
     object-fit: cover;
     border: 1px solid var(--accent-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     opacity: 0.85;
+    filter: grayscale(25%);
 }
 
-/* Mobile-first smaller videos */
+/* Mobile-first smaller videos (kept fully inside the viewport so they never clip) */
 .cv-1 {
-    width: 150px;
-    height: 220px;
-    top: 15%;
-    right: -20px;
-    transform: rotate(8deg);
+    width: clamp(110px, 38vw, 170px);
+    height: clamp(160px, 55vw, 250px);
+    top: 12%;
+    right: 8%;
+    transform: rotate(6deg);
 }
 
 .cv-2 {
-    width: 180px;
-    height: 120px;
-    bottom: 20%;
-    left: -30px;
-    transform: rotate(-12deg);
+    width: clamp(120px, 42vw, 190px);
+    height: clamp(80px, 26vw, 130px);
+    bottom: 15%;
+    left: 6%;
+    transform: rotate(-10deg);
 }
 
 @media (min-width: 768px) {
     .cv-1 {
         width: 300px;
         height: 400px;
-        top: 15%;
-        right: 15%;
-        transform: rotate(12deg);
+        top: 12%;
+        right: 6%;
+        transform: rotate(10deg);
     }
-    
+
     .cv-2 {
-        width: 350px;
-        height: 250px;
-        bottom: 15%;
-        left: 20%;
-        transform: rotate(-8deg);
+        width: 360px;
+        height: 260px;
+        bottom: 12%;
+        left: 7%;
+        transform: rotate(-6deg);
     }
 }
 
@@ -262,9 +282,20 @@ img, video {
 }
 
 @keyframes scrollLine {
-    0% { transform: scaleY(0); opacity: 0; }
-    50% { transform: scaleY(1); opacity: 1; }
-    100% { transform: scaleY(1); opacity: 0; }
+    0% {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 0;
+    }
 }
 
 /* ============================
@@ -356,12 +387,183 @@ img, video {
 }
 
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Scrolls exactly half its duplicated width */
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Scrolls exactly half its duplicated width */
 }
 
 /* ============================
-   4. Booking Form
+   4. Reviews
+   ============================ */
+.reviews-section {
+    padding: 5rem 0;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.reviews-slider {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    touch-action: pan-y;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    user-select: none;
+    cursor: grab;
+    margin-bottom: 2.5rem;
+}
+
+.reviews-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.reviews-slider:active {
+    cursor: grabbing;
+}
+
+.reviews-track {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.review-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background: #101010;
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease;
+}
+
+.review-card:hover {
+    border-color: var(--text-color);
+}
+
+.review-stars {
+    color: #FBBC04;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    line-height: 1;
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+    flex-grow: 1;
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.review-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.review-source {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+}
+
+.reviews-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.reviews-nav {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.reviews-nav:hover {
+    color: var(--accent-color);
+    border-color: var(--text-color);
+}
+
+.reviews-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.reviews-link:hover {
+    color: var(--accent-color);
+    border-color: var(--text-color);
+}
+
+.reviews-link-primary {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: 1px solid var(--accent-color);
+}
+
+.reviews-link-primary:hover {
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+    .review-card {
+        flex: 0 0 calc((100% - 1.5rem) / 2);
+    }
+}
+
+@media (min-width: 1024px) {
+    .review-card {
+        flex: 0 0 calc((100% - 3rem) / 3);
+    }
+}
+
+/* ============================
+   5. Booking Form
    ============================ */
 .booking-section {
     padding: 5rem 0;
@@ -420,8 +622,15 @@ img, video {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .form-step h3 {
@@ -458,7 +667,8 @@ img, video {
     border-color: var(--text-color);
 }
 
-.text-input, .fallback-input {
+.text-input,
+.fallback-input {
     width: 100%;
     padding: 1rem;
     background: transparent;
@@ -469,7 +679,8 @@ img, video {
     margin-bottom: 2rem;
 }
 
-.text-input:focus, .fallback-input:focus {
+.text-input:focus,
+.fallback-input:focus {
     outline: none;
     border-color: var(--accent-color);
 }
@@ -541,7 +752,7 @@ img, video {
 }
 
 /* ============================
-   5. Contact Section
+   6. Contact Section
    ============================ */
 .contact-section {
     padding: 5rem 0;
@@ -587,7 +798,8 @@ img, video {
     color: #999;
 }
 
-.contact-link, .instagram-btn {
+.contact-link,
+.instagram-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
@@ -596,7 +808,8 @@ img, video {
     transition: color 0.2s ease;
 }
 
-.contact-link:hover, .instagram-btn:hover {
+.contact-link:hover,
+.instagram-btn:hover {
     color: var(--accent-color);
 }
 
@@ -606,7 +819,7 @@ img, video {
 }
 
 /* ============================
-   6. Global CTA
+   7. Global CTA
    ============================ */
 .global-cta {
     position: fixed;
@@ -629,9 +842,9 @@ img, video {
     visibility: hidden;
     transform: translateY(100%);
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.4s ease,
-                background-color 0.2s ease;
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.4s ease,
+        background-color 0.2s ease;
 }
 
 .global-cta.visible {
@@ -649,7 +862,7 @@ img, video {
 }
 
 /* ============================
-   7. Lightbox
+   8. Lightbox
    ============================ */
 .lightbox {
     position: fixed;
@@ -724,7 +937,7 @@ img, video {
 }
 
 /* ============================
-   8. Cookie Policy Banner
+   9. Cookie Policy Banner
    ============================ */
 .cookie-banner {
     position: fixed;
@@ -740,9 +953,9 @@ img, video {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.4s ease,
-                visibility 0.4s ease,
-                bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.4s ease,
+        visibility 0.4s ease,
+        bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cookie-banner.hidden {
@@ -786,4 +999,19 @@ body.cta-visible .cookie-banner {
 
 .cookie-btn:hover {
     opacity: 0.9;
+}
+
+/* ============================
+   10. Visually Hidden (sr-only)
+   ============================ */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
