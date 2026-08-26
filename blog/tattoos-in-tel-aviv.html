@@ -26,12 +26,11 @@
     <meta name="twitter:description"
         content="Inside SAGE — a tattoo, piercing, and fine art studio in Tel Aviv-Yafo. How to choose a studio, the city's tattoo styles, and how to book your session.">
     <meta name="twitter:image" content="https://sagetattoo.shop/assets/images/1.jpg">
-    <!-- Google Fonts: Bebas Neue for display, Inter for body -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="blog.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Google tag (gtag.js) -->
@@ -40,12 +39,8 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-N3FE88WPKJ');
     </script>
-    <!-- GSAP + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- Structured data -->
     <script type="application/ld+json">
     {
@@ -86,159 +81,139 @@
         }
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://sagetattoo.shop/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://sagetattoo.shop/blog/tattoos-in-tel-aviv.html"
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>
-    <!-- Hero -->
-    <header class="blog-hero" id="hero">
-        <video class="blog-hero-video" autoplay muted loop playsinline poster="../assets/images/1.jpg">
-            <source src="../assets/videos/random/1.mp4" type="video/mp4">
-        </video>
-        <div class="blog-hero-overlay"></div>
-        <div class="blog-hero-content">
-            <h1 class="blog-hero-title">Tattoos in Tel Aviv</h1>
-            <p class="blog-hero-sub">Inside SAGE — a tattoo, piercing, and fine art studio in the heart of
-                Tel Aviv-Yafo</p>
-        </div>
-        <div class="scroll-indicator">
-            <span>SCROLL</span>
-            <div class="line"></div>
+
+    <header class="blog-nav">
+        <div class="blog-nav-inner">
+            <a href="../index.html" class="blog-nav-brand">SAGE</a>
+            <nav class="blog-nav-links" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#artists">Artists</a>
+                <a href="../index.html#contact">Contact</a>
+            </nav>
         </div>
     </header>
 
     <main>
-        <!-- Intro -->
-        <section class="blog-section" id="intro">
-            <div class="container">
-                <p class="pull-quote" data-reveal>Tel Aviv has one of the most active tattoo scenes in the Middle East.
-                </p>
-                <p class="body-copy" data-reveal>A mix of fine-line minimalism, bold blackwork, illustrative color
-                    pieces, and everything in between. If you're searching for a tattoo in Tel Aviv, the sheer number of
-                    studios and styles can be overwhelming. Here's what actually matters when you're choosing where to
-                    get inked.</p>
-            </div>
-        </section>
+        <article class="blog-article">
 
-        <!-- Finding the Right Studio -->
-        <section class="blog-section" id="finding-the-right-studio">
-            <div class="container">
-                <h2 class="section-title" data-reveal>Finding the Right Studio</h2>
-                <p class="body-copy" data-reveal>Not every studio in Tel Aviv works the same way. Some are walk-in
-                    friendly, others are appointment-only and booked out weeks in advance. Hygiene standards,
-                    sterilization practices, and the artist's actual portfolio matter more than a studio's Instagram
-                    follower count. Before booking, look at healed work — not just fresh photos — and ask about the
-                    artist's specific style focus.</p>
-                <div class="blog-images" data-reveal>
-                    <img src="../assets/images/2.jpg" width="1170" height="1556" loading="lazy"
-                        alt="Detailed tattoo line work by SAGE Tel Aviv studio">
-                    <img src="../assets/images/3.jpg" width="1170" height="1560" loading="lazy"
-                        alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo">
-                    <img src="../assets/images/4.jpg" width="1170" height="1554" loading="lazy"
-                        alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists">
-                </div>
+            <div class="blog-title-block">
+                <h1 class="blog-title">TATTOOS IN<br>TEL AVIV</h1>
+                <p class="blog-meta">Inside SAGE — a tattoo, piercing, and fine art studio in the heart of Tel Aviv-Yafo</p>
             </div>
-        </section>
 
-        <!-- Styles You'll Find in Tel Aviv -->
-        <section class="blog-section" id="styles">
-            <div class="container">
-                <h2 class="section-title" data-reveal>Styles You'll Find in Tel Aviv</h2>
-                <p class="body-copy" data-reveal>The city's tattoo culture leans heavily into fine art and custom design
-                    rather than flash-off-the-wall pieces. Common styles include fine-line and single-needle work, bold
-                    traditional and neo-traditional pieces, blackwork and dotwork, and illustrative custom pieces built
-                    around a client's own sketch or reference. A good studio will help you develop an idea into a design
-                    that actually works on skin — not just resize a picture you found online.</p>
-                <div class="blog-images blog-images-stagger" data-reveal>
-                    <img src="../assets/images/7.jpg" width="1170" height="1554" loading="lazy"
-                        alt="Tattoo portfolio piece from SAGE Tel Aviv studio">
-                    <img src="../assets/images/8.jpg" width="1170" height="1554" loading="lazy"
-                        alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv">
-                    <img src="../assets/images/9.jpg" width="1170" height="1554" loading="lazy"
-                        alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio">
-                </div>
-            </div>
-        </section>
+            <figure class="blog-hero-image">
+                <img src="../assets/images/1.jpg" width="1170" height="1560" alt="Tattoo work at SAGE, a tattoo studio in Tel Aviv" loading="eager">
+            </figure>
 
-        <!-- Tattoos at SAGE -->
-        <section class="blog-section" id="tattoos-at-sage">
-            <div class="container">
-                <h2 class="section-title" data-reveal>Tattoos at SAGE</h2>
-                <p class="body-copy" data-reveal>At SAGE, based on Eilat Street in Tel Aviv-Yafo, the studio operates as
-                    a tattoo shop, piercing studio, and fine art gallery in one space — walk-ins are welcome and guest
-                    artist spots open up throughout the year. The focus is on clean, professional studio standards and
-                    custom work tailored to what each client actually wants, not templated designs.</p>
-                <div class="blog-links" data-reveal>
-                    <a href="https://www.instagram.com/sage.tattooshop/" target="_blank" rel="noopener noreferrer"
-                        class="instagram-link">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                        Follow @sage.tattooshop
-                    </a>
-                    <a href="https://www.instagram.com/groc08/" target="_blank" rel="noopener noreferrer"
-                        class="instagram-link">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                        Artist: @groc08
-                    </a>
-                </div>
-                <div class="blog-images blog-images-duo" data-reveal>
-                    <img src="../assets/images/1.jpg" width="1170" height="1560" loading="lazy"
-                        alt="Close-up tattoo ink work by SAGE Tel Aviv studio">
-                    <img src="../assets/images/5.jpg" width="1170" height="1170" loading="lazy"
-                        alt="Tattoo artwork in progress at SAGE Tel Aviv studio">
-                </div>
-            </div>
-        </section>
+            <div class="blog-content">
 
-        <!-- Booking a Tattoo in Tel Aviv -->
-        <section class="blog-section" id="booking-a-tattoo">
-            <div class="container">
-                <h2 class="section-title" data-reveal>Booking a Tattoo in Tel Aviv</h2>
-                <p class="body-copy" data-reveal>Whether you're a Tel Aviv local or visiting the city, plan ahead for
-                    anything detailed or large — good artists' schedules fill up. Bring reference images, be upfront
-                    about placement and sizing, and don't be afraid to ask questions about aftercare before you sit
-                    down.</p>
-                <div class="blog-cta-buttons" data-reveal>
-                    <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo"
-                        target="_blank" rel="noopener noreferrer" class="btn">Book a Tattoo</a>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJ_4lpuhJNHRURtDYa6DsDadI"
-                        target="_blank" rel="noopener noreferrer" class="btn btn-outline">Leave us a Google Review</a>
-                </div>
-            </div>
-        </section>
+                <p class="blog-lead">Tel Aviv has one of the most active tattoo scenes in the Middle East.</p>
 
-        <!-- Closing -->
-        <section class="blog-section blog-closing" id="closing">
-            <div class="container">
-                <h2 class="blog-closing-title" data-reveal>Ready for your next tattoo in Tel Aviv?</h2>
-                <p class="body-copy" data-reveal>Looking for a tattoo in Tel Aviv? Get in touch with SAGE to check
-                    availability, browse the gallery, or stop by for a walk-in consultation.</p>
-                <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo"
-                    target="_blank" rel="noopener noreferrer" class="btn btn-center" data-reveal>Book a Tattoo</a>
+                <p>A mix of fine-line minimalism, bold blackwork, illustrative color pieces, and everything in between. If you're searching for a tattoo in Tel Aviv, the sheer number of studios and styles can be overwhelming. Here's what actually matters when you're choosing where to get inked.</p>
+
+                <h2>Finding the Right Studio</h2>
+
+                <p>Not every studio in Tel Aviv works the same way. Some are walk-in friendly, others are appointment-only and booked out weeks in advance. Hygiene standards, sterilization practices, and the artist's actual portfolio matter more than a studio's Instagram follower count. Before booking, look at healed work — not just fresh photos — and ask about the artist's specific style focus.</p>
+
+                <div class="blog-gallery blog-gallery-3">
+                    <img src="../assets/images/2.jpg" width="1170" height="1556" loading="lazy" alt="Detailed tattoo line work by SAGE Tel Aviv studio">
+                    <img src="../assets/images/3.jpg" width="1170" height="1560" loading="lazy" alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo">
+                    <img src="../assets/images/4.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists">
+                </div>
+
+                <h2>Styles You'll Find in Tel Aviv</h2>
+
+                <p>The city's tattoo culture leans heavily into fine art and custom design rather than flash-off-the-wall pieces. Common styles include fine-line and single-needle work, bold traditional and neo-traditional pieces, blackwork and dotwork, and illustrative custom pieces built around a client's own sketch or reference. A good studio will help you develop an idea into a design that actually works on skin — not just resize a picture you found online.</p>
+
+                <div class="blog-gallery blog-gallery-3">
+                    <img src="../assets/images/7.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo portfolio piece from SAGE Tel Aviv studio">
+                    <img src="../assets/images/8.jpg" width="1170" height="1554" loading="lazy" alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv">
+                    <img src="../assets/images/9.jpg" width="1170" height="1554" loading="lazy" alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio">
+                </div>
+
+                <h2>Tattoos at SAGE</h2>
+
+                <p>At SAGE, based on Eilat Street in Tel Aviv-Yafo, the studio operates as a tattoo shop, piercing studio, and fine art gallery in one space — walk-ins are welcome and guest artist spots open up throughout the year. The focus is on clean, professional studio standards and custom work tailored to what each client actually wants, not templated designs.</p>
+
+                <div class="blog-social-links">
+                    <a href="https://www.instagram.com/sage.tattooshop/" target="_blank" rel="noopener noreferrer" class="blog-social-link">Follow @sage.tattooshop</a>
+                    <a href="https://www.instagram.com/groc08/" target="_blank" rel="noopener noreferrer" class="blog-social-link">Artist: @groc08</a>
+                </div>
+
+                <div class="blog-gallery blog-gallery-2">
+                    <img src="../assets/images/1.jpg" width="1170" height="1560" loading="lazy" alt="Close-up tattoo ink work by SAGE Tel Aviv studio">
+                    <img src="../assets/images/5.jpg" width="1170" height="1170" loading="lazy" alt="Tattoo artwork in progress at SAGE Tel Aviv studio">
+                </div>
+
+                <h2>Booking a Tattoo in Tel Aviv</h2>
+
+                <p>Whether you're a Tel Aviv local or visiting the city, plan ahead for anything detailed or large — good artists' schedules fill up. Bring reference images, be upfront about placement and sizing, and don't be afraid to ask questions about aftercare before you sit down.</p>
+
+                <div class="blog-cta-row">
+                    <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo" target="_blank" rel="noopener noreferrer" class="blog-btn">Book a Tattoo</a>
+                    <a href="https://www.google.com/search?q=google+reviews+sage+tatto&oq=google+reviews+sage+tatto&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRhA0gEINzM5MWowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x151d4d12ba6989ff:0xd269033be81a36b4,3,,,,"
+                        target="_blank" rel="noopener noreferrer" class="blog-btn blog-btn-outline">Leave us a Google Review</a>
+                </div>
+
+                <div class="blog-closing">
+                    <h2>Ready for your next tattoo in Tel Aviv?</h2>
+                    <p>Looking for a tattoo in Tel Aviv? Get in touch with SAGE to check availability, browse the gallery, or stop by for a walk-in consultation.</p>
+                    <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo" target="_blank" rel="noopener noreferrer" class="blog-btn blog-btn-center">Book a Tattoo</a>
+                </div>
+
             </div>
-        </section>
+        </article>
     </main>
 
     <!-- Footer -->
-    <footer class="blog-footer">
-        <div class="container blog-footer-inner">
-            <a href="../index.html" class="blog-footer-brand">SAGE</a>
-            <nav class="blog-footer-nav" aria-label="Footer">
-                <a href="../index.html">Home</a>
-                <a href="tattoos-in-tel-aviv.html">Blog: Tattoos in Tel Aviv</a>
-            </nav>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">SAGE</div>
+            <div class="footer-columns">
+                <nav class="footer-col" aria-label="Footer navigation">
+                    <h3 class="footer-heading">Navigation</h3>
+                    <a href="../index.html" class="footer-link">Home</a>
+                    <a href="../index.html#artists" class="footer-link">Artists</a>
+                    <a href="../index.html#contact" class="footer-link">Contact</a>
+                    <a href="../sitemap.xml" class="footer-link">Sitemap</a>
+                </nav>
+                <div class="footer-col">
+                    <h3 class="footer-heading">Artists</h3>
+                    <a href="../artists/artist.html?name=groc" class="footer-link">Groc</a>
+                    <a href="../artists/artist.html?name=sunches" class="footer-link">Sunches</a>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-heading">Blog</h3>
+                    <a href="tattoos-in-tel-aviv.html" class="footer-link">Tattoos in Tel Aviv</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Global CTA -->
+    <!-- WhatsApp CTA -->
     <a href="https://wa.me/972526504348?text=Hi%2C%20I%27m%20interested%20in%20a%20tattoo" class="global-cta"
         target="_blank" rel="noopener noreferrer" aria-label="Book a tattoo appointment via WhatsApp in Tel Aviv">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -248,7 +223,6 @@
         <span>Book on WhatsApp</span>
     </a>
 
-    <script src="blog.js"></script>
 </body>
 
 </html>

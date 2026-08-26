@@ -1,0 +1,296 @@
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #f4f4f4;
+    --accent-color: #8a9a86;
+    --border-color: #333333;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --global-padding: 1.5rem;
+    --max-width: 1200px;
+    --cta-height: 70px;
+    --header-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding-top: var(--header-height);
+    padding-bottom: var(--cta-height);
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ============================
+   Sticky Header
+   ============================ */
+.artist-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--global-padding);
+    z-index: 100;
+}
+
+.artist-header-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+}
+
+.artist-header-back:hover {
+    color: var(--accent-color);
+}
+
+.artist-header-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.artist-header-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.artist-header-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ============================
+   Hero
+   ============================ */
+.artist-hero {
+    padding: 6rem var(--global-padding) 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.artist-hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.artist-hero-bio {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.7;
+    color: #ccc;
+    max-width: 600px;
+}
+
+/* ============================
+   Gallery
+   ============================ */
+.artist-gallery {
+    padding: 2rem var(--global-padding) 6rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.artist-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.artist-gallery-item {
+    position: relative;
+    overflow: hidden;
+    background-color: #111;
+}
+
+.artist-gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: filter 0.5s ease;
+}
+
+.artist-gallery-item img.lazy {
+    filter: blur(8px) brightness(0.6);
+    min-height: 250px;
+    object-fit: cover;
+}
+
+.artist-gallery-item img.lazy.loaded {
+    filter: none;
+    min-height: auto;
+}
+
+/* Scroll distortion — driven per-frame by JS spring, no CSS transition */
+.artist-gallery-item img.distort {
+    will-change: transform, filter;
+}
+
+/* ============================
+   Global CTA (WhatsApp)
+   ============================ */
+.global-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--cta-height);
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.25s ease,
+        background-color 0.2s ease;
+}
+
+.global-cta.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.global-cta:hover {
+    background-color: #d4d4d4;
+}
+
+/* ============================
+   Footer
+   ============================ */
+.site-footer {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem var(--global-padding) 2rem;
+}
+
+.footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.footer-brand {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 600px) {
+    .footer-columns {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-heading {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.footer-link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #999;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent-color);
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (min-width: 600px) {
+    .artist-gallery-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .artist-gallery-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.25rem;
+    }
+
+    .artist-hero {
+        padding: 8rem var(--global-padding) 5rem;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .artist-gallery-item img.distort {
+        will-change: auto;
+    }
+}

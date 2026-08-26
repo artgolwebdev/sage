@@ -302,47 +302,321 @@ video {
    2. About Strip
    ============================ */
 .about-strip {
-    padding: 4rem var(--global-padding);
-    text-align: center;
+    position: relative;
+    padding: 6rem var(--global-padding) 5rem;
     border-bottom: 1px solid var(--border-color);
     background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.about-strip::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: clamp(140px, 28vw, 360px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-strip.bg-loaded::after {
+    background-image: var(--about-bg);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+    .about-strip::after {
+        width: clamp(200px, 50vw, 320px);
+    }
 }
 
 .about-headline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.about-line {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
+    font-weight: 400;
     text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    display: block;
+}
+
+.about-line-1 {
+    font-size: clamp(3rem, 11vw, 9rem);
+    color: var(--text-color);
+}
+
+.about-line-2 {
+    font-size: clamp(2.2rem, 7.5vw, 6rem);
+    color: var(--accent-color);
+    padding-left: 0.5em;
+}
+
+.about-line-3 {
+    font-size: clamp(3.5rem, 13vw, 11rem);
+    color: var(--text-color);
+    line-height: 0.85;
 }
 
 .about-tags {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
+    gap: 0.75rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+}
+
+.about-tags .tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    background: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.about-tags .tag:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
 }
 
 @media (min-width: 768px) {
+    .about-strip {
+        padding: 8rem var(--global-padding) 6rem;
+    }
+
     .about-tags {
         flex-direction: row;
+        gap: 1rem;
     }
 }
 
-.tag {
-    font-size: 0.85rem;
-    font-weight: 700;
+/* ============================
+   3. Artists
+   ============================ */
+.artists-section {
+    padding: 5rem 0;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.artists-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.artist-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    flex: 0 1 auto;
+    width: 260px;
+    padding-top: 2.5rem;
+}
+
+.artist-card[data-index="1"] {
+    margin-top: 4rem;
+}
+
+/* --- Oversized background name --- */
+.artist-card-bigname {
+    position: absolute;
+    top: 0;
+    left: -0.15em;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 7.5rem);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--text-color);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
     color: var(--text-color);
-    background: transparent;
+    opacity: 0.06;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.3s ease;
+}
+
+.artist-card:hover .artist-card-bigname {
+    opacity: 0.12;
+}
+
+/* --- Offset accent block --- */
+.artist-card-block {
+    position: absolute;
+    top: 1.5rem;
+    left: -8px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-color);
+    opacity: 0.08;
+    z-index: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.artist-card:hover .artist-card-block {
+    transform: translate(4px, 4px);
+    opacity: 0.14;
+}
+
+.artist-card[data-index="1"] .artist-card-block {
+    left: auto;
+    right: -8px;
+}
+
+/* --- Card image container --- */
+.artist-card-image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: var(--accent-color);
+    border-radius: 0.35rem;
+    overflow: visible;
+    margin-bottom: 1.25rem;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: bottom center;
+}
+
+.artist-card:hover .artist-card-image {
+    transform: scale(1.04);
+    box-shadow: 0 10px 50px rgba(138, 154, 134, 0.2);
+}
+
+.artist-card-image img.artist-profile {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 135%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    pointer-events: none;
+}
+
+.artist-card-logo {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.5;
+    animation: artistLogoFloat 4s ease-in-out infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 0 4px rgba(138, 154, 134, 0.3));
+    transition: opacity 0.3s ease;
+}
+
+.artist-card:hover .artist-card-logo {
+    opacity: 0.9;
+}
+
+@keyframes artistLogoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(8deg); }
+}
+
+/* --- Artist name (below card) --- */
+.artist-card-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    z-index: 1;
+    position: relative;
+}
+
+/* --- See More button --- */
+.artist-card-btn {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 1;
+    position: relative;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.artist-card-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+.artist-card-btn:active {
+    transform: translateY(0);
 }
 
 /* ============================
-   3. Gallery (Marquee)
+   Artists — Desktop
+   ============================ */
+@media (min-width: 768px) {
+    .artists-grid {
+        gap: 5rem;
+    }
+
+    .artist-card {
+        width: 300px;
+        padding-top: 3.5rem;
+    }
+
+    .artist-card[data-index="1"] {
+        margin-top: 6rem;
+    }
+
+    .artist-card-bigname {
+        font-size: clamp(5rem, 10vw, 9rem);
+    }
+
+    .artist-card-image {
+        width: 240px;
+        height: 240px;
+        border-radius: 0.25rem;
+    }
+
+    .artist-card-name {
+        font-size: 1.8rem;
+    }
+}
+
+/* ============================
+   4. Gallery (Marquee)
    ============================ */
 .gallery-section {
     padding: 2rem 0;
@@ -379,10 +653,20 @@ video {
     object-fit: cover;
     filter: grayscale(20%);
     transition: filter 0.3s ease;
-    cursor: pointer;
+    cursor: inherit;
 }
 
-.marquee-content img:hover {
+.marquee-content img.lazy {
+    filter: grayscale(20%) blur(8px) brightness(0.6);
+    transition: filter 0.5s ease;
+}
+
+.marquee-content img.lazy.loaded {
+    filter: grayscale(20%);
+}
+
+.marquee-content img:hover,
+.marquee-content img.lazy.loaded:hover {
     filter: grayscale(0%);
 }
 
@@ -782,6 +1066,7 @@ video {
 .address {
     font-size: 1.2rem;
     line-height: 1.5;
+    font-style: normal;
 }
 
 .powered-by {
@@ -1004,7 +1289,66 @@ body.cta-visible .cookie-banner {
 }
 
 /* ============================
-   10. Visually Hidden (sr-only)
+   10. Footer
+   ============================ */
+.site-footer {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem var(--global-padding) 2rem;
+}
+
+.footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.footer-brand {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 600px) {
+    .footer-columns {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-heading {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.footer-link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #999;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent-color);
+}
+
+/* ============================
+   11. Visually Hidden (sr-only)
    ============================ */
 .sr-only {
     position: absolute;
