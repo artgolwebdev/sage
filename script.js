@@ -1,5 +1,5 @@
 // --- Random hero background video ---
-const HERO_VIDEO_OPTIONS = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4'];
+const HERO_VIDEO_OPTIONS = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4', '10.mp4', '11.mp4', '12.mp4'];
 const HERO_VIDEO_DIR = 'assets/videos/random/';
 const DEFAULT_HERO_VIDEO = HERO_VIDEO_OPTIONS[0];
 const heroVideo = document.getElementById('hero-bg-video');
@@ -237,10 +237,98 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = waUrl;
     });
 
+    // --- Artists Section ---
+    const ARTISTS = [
+        {
+            name: 'Groc',
+            imageSrc: 'assets/artists/groc/profile.png',
+            pageUrl: 'artists/artist.html?name=groc',
+            alt: 'Groc, tattoo artist at Sage Tattoo Studio, Tel Aviv',
+            title: 'Groc - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
+        },
+        {
+            name: 'Sunches',
+            imageSrc: 'assets/artists/sunches/profile.png',
+            pageUrl: 'artists/artist.html?name=sunches',
+            alt: 'Sunches, tattoo artist in Tel Aviv at Sage Tattoo Studio',
+            title: 'Sunches - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
+        }
+    ];
+
+    const artistsGrid = document.getElementById('artists-grid');
+    if (artistsGrid) {
+        const fragment = document.createDocumentFragment();
+        ARTISTS.forEach((artist, i) => {
+            const card = document.createElement('a');
+            card.className = 'artist-card';
+            card.href = artist.pageUrl;
+            card.dataset.index = i;
+
+            card.innerHTML = `
+                <span class="artist-card-bigname">${artist.name}</span>
+                <div class="artist-card-block"></div>
+                <div class="artist-card-image">
+                    <img class="artist-profile" src="${artist.imageSrc}" alt="${artist.alt}" title="${artist.title}" loading="${i === 0 ? 'eager' : 'lazy'}">
+                    <img class="artist-card-logo" src="assets/logo.png" alt="" aria-hidden="true">
+                </div>
+                <span class="artist-card-name">${artist.name}</span>
+                <span class="artist-card-btn">See More</span>
+            `;
+            fragment.appendChild(card);
+        });
+        artistsGrid.appendChild(fragment);
+    }
+
     // --- Gallery & Lightbox Logic ---
     const marqueeContainer = document.querySelector('.marquee-container');
     const marqueeContent = document.querySelector('.marquee-content');
     const galleryImages = Array.from(marqueeContent.querySelectorAll('img'));
+
+    // --- Shuffle gallery order on each page load ---
+    const half = galleryImages.length / 2;
+    const attrs = galleryImages.slice(0, half).map(img => ({
+        src: img.getAttribute('src'),
+        dataSrc: img.getAttribute('data-src'),
+        alt: img.getAttribute('alt'),
+        title: img.getAttribute('title')
+    }));
+    for (let i = attrs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [attrs[i], attrs[j]] = [attrs[j], attrs[i]];
+    }
+    galleryImages.forEach((img, i) => {
+        const a = attrs[i % attrs.length];
+        img.setAttribute('src', a.src);
+        img.setAttribute('data-src', a.dataSrc);
+        img.setAttribute('alt', a.alt);
+        img.setAttribute('title', a.title);
+    });
+
+    // --- Load all gallery images eagerly (IntersectionObserver doesn't work with CSS transform scrolling) ---
+    const lazyImages = marqueeContent.querySelectorAll('img.lazy');
+    lazyImages.forEach(img => {
+        img.src = img.dataset.src;
+        img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+        img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+    });
+
+    // --- About-strip background image: lazy load via CSS custom property ---
+    const aboutSection = document.querySelector('.about-strip');
+    if (aboutSection && 'IntersectionObserver' in window) {
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.setProperty('--about-bg', 'url(assets/about-strip.png)');
+                    entry.target.classList.add('bg-loaded');
+                    aboutObserver.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '200px' });
+        aboutObserver.observe(aboutSection);
+    } else if (aboutSection) {
+        aboutSection.style.setProperty('--about-bg', 'url(assets/about-strip.png)');
+        aboutSection.classList.add('bg-loaded');
+    }
 
     let currentTranslate = 0;
     let isDragging = false;
@@ -348,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openLightbox(index) {
         currentLightboxIndex = index;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].src;
+        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -360,12 +448,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showNextImage() {
         currentLightboxIndex = (currentLightboxIndex + 1) % uniqueImages.length;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].src;
+        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
     }
 
     function showPrevImage() {
         currentLightboxIndex = (currentLightboxIndex - 1 + uniqueImages.length) % uniqueImages.length;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].src;
+        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
     }
 
     galleryImages.forEach((img) => {
