@@ -252,6 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
             pageUrl: 'artists/artist.html?name=sunches',
             alt: 'Sunches, tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Sunches - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
+        },
+        {
+            name: 'Gosha',
+            imageSrc: 'assets/artists/gosha/profile.png',
+            pageUrl: 'artists/artist.html?name=gosha',
+            alt: 'Gosha, American Traditional tattoo artist in Tel Aviv at Sage Tattoo Studio',
+            title: 'Gosha - American Traditional Tattoo Artist Tel Aviv - Sage Tattoo Studio'
         }
     ];
 

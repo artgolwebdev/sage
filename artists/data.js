@@ -57,6 +57,32 @@ var ARTISTS_DATA = {
             'Script calligraphy tattoo at Sage Tattoo Studio Tel Aviv'
         ]
     },
+    gosha: {
+        name: 'Gosha',
+        slug: 'gosha',
+        profileImage: '../assets/artists/gosha/profile.png',
+        pageUrl: '../index.html',
+        bio: 'Gosha is a tattoo artist in Tel Aviv specialising in American Traditional tattoos. His bold lines, classic colour palettes, and timeless motifs bring old-school tattooing to Sage Tattoo Studio — crisp flash-driven designs that stay sharp for a lifetime.',
+        galleryImages: [
+            '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
+            '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
+            '11.jpg', '12.jpg'
+        ],
+        altTemplates: [
+            'American Traditional tattoo by Gosha, tattoo artist in Tel Aviv',
+            'Bold old-school tattoo piece at Sage Tattoo Studio Tel Aviv',
+            'Classic traditional tattoo by Gosha, a Tel Aviv tattoo artist',
+            'Bold colour tattoo at a tattoo shop in Tel Aviv by Gosha',
+            'Old-school traditional work by Gosha, tattoo in Tel Aviv',
+            'Bold line traditional tattoo at Sage, a Tel Aviv tattoo studio',
+            'Classic american traditional tattoo by Gosha, Tel Aviv artist',
+            'Bold ink piece at Sage Tattoo Studio in Tel Aviv by Gosha',
+            'Traditional tattoo art by Gosha, tattoo artist Tel Aviv',
+            'Old-school tattoo detail at a tattoo studio in Tel Aviv',
+            'Bold american traditional work by Gosha, Tel Aviv tattoo artist',
+            'Classic traditional tattoo at Sage Tattoo Studio Tel Aviv'
+        ]
+    },
     sunches: {
         name: 'Sunches',
         slug: 'sunches',

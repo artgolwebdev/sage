@@ -7,7 +7,7 @@ Static single-page site for **SAGE Tattoo Studio** (Tel Aviv-Yaffo), deployed on
 | Path | Description |
 | --- | --- |
 | `index.html` | Landing page: hero (random video), about strip, gallery marquee + lightbox, Google Reviews slider, booking form (WhatsApp), contact + map, floating WhatsApp CTA. |
-| `artists/artist.html` | Artist portfolio page (query-param routing: `?name=groc`, `?name=sunches`). |
+| `artists/artist.html` | Artist portfolio page (query-param routing: `?name=groc`, `?name=sunches`, `?name=gosha`). |
 | `blog/tattoos-in-tel-aviv.html` | Blog article: "Tattoos in Tel Aviv" — editorial typography, HTML/CSS only, no JS. |
 | `404.html` | Custom 404 (noindex). |
 
@@ -21,7 +21,7 @@ Static single-page site for **SAGE Tattoo Studio** (Tel Aviv-Yaffo), deployed on
 
 ## SEO / metadata
 
-- `robots.txt`, `sitemap.xml` (4 URLs), canonical tags, Open Graph / Twitter cards, JSON-LD (`TattooParlor`, `WebSite`, `BlogPosting`, `Person`, `BreadcrumbList`).
+- `robots.txt`, `sitemap.xml` (5 URLs), canonical tags, Open Graph / Twitter cards, JSON-LD (`TattooParlor`, `WebSite`, `BlogPosting`, `Person`, `BreadcrumbList`).
 - Google Analytics `G-N3FE88WPKJ` (gtag).
 - SEO target: **"tattoo tel aviv"** — blog supports related **"tattoos in tel aviv"**.
 
@@ -45,3 +45,4 @@ Static HTML/CSS/JS — no build step. Serve the repo root (e.g. via XAMPP or `py
 - Simplified blog design: editorial/brutalist typography, HTML + CSS only. Removed GSAP, ScrollTrigger, `blog.js`, and all animation code.
 - Improved footer navigation across Home, Artist, and Blog pages — added artist links, blog link, contact link, sitemap link.
 - Updated `sitemap.xml` with blog URL. Sitemap now contains 4 indexable URLs.
+- Added new artist **Gosha** (American Traditional style): added to `artists/data.js`, home page `script.js` ARTISTS grid, footer links (index + artist pages), and `sitemap.xml`. SEO alt/title image text targets "tattoo tel aviv".
