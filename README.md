@@ -16,7 +16,8 @@ Static single-page site for **SAGE Tattoo Studio** (Tel Aviv-Yaffo), deployed on
 - `styles.css` — global styles (CSS variables: `--accent-color: #8a9a86`, `--font-display: Bebas Neue`, `--font-body: Inter`).
 - `script.js` — homepage logic: random hero video, preloader, marquee drag/auto-scroll, lightbox, multi-step booking form, reviews slider, WhatsApp CTA visibility, cookie banner.
 - `assets/images/` — tattoo gallery photos (1170px wide, used for gallery, lightbox, OG image).
-- `assets/videos/random/` (1–9.mp4) — random hero background videos (homepage picks one at random).
+- `assets/fonts/bebas-neue-latin.woff2` — self-hosted Bebas Neue (display font), served via `@font-face` with `font-display: block` and `<link rel="preload">` so display titles render in their final font with no fallback-font "jump".
+- `assets/videos/random/` (1–12.mp4) — random hero background videos (homepage picks one at random).
 - `assets/videos/` (2.mp4, 3.mp4) — chaotic overlay videos on the hero.
 
 ## SEO / metadata
@@ -47,3 +48,6 @@ Static HTML/CSS/JS — no build step. Serve the repo root (e.g. via XAMPP or `py
 - Updated `sitemap.xml` with blog URL. Sitemap now contains 4 indexable URLs.
 - Added new artist **Gosha** (American Traditional style): added to `artists/data.js`, home page `script.js` ARTISTS grid, footer links (index + artist pages), and `sitemap.xml`. SEO alt/title image text targets "tattoo tel aviv".
 - Improved artist-card profile rendering: profile images now lazy-load with the logo as an instant placeholder (IntersectionObserver + `.loaded` swap), so the artist section never shows empty boxes while images load.
+- Eliminated font "jump" on load: self-hosted Bebas Neue (`assets/fonts/bebas-neue-latin.woff2`) with `font-display: block` + `<link rel="preload">` across Home, Artist, and Blog pages, so the SAGE display title always renders in its correct font from the first frame.
+- Simplified the hero + preloader title to a clean, classic presentation (removed animation, shadow, and large oversizing).
+- Project audit cleanup: removed the unused `.fallback-input` CSS class, the unused `pageUrl` property from `artists/data.js`, the orphaned `assets/images/6.webp`, and corrected the random-video count in these docs (1–12).

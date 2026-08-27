@@ -26,10 +26,12 @@
     <meta name="twitter:description"
         content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
     <meta name="twitter:image" content="https://sagetattoo.shop/assets/images/4.jpg">
-    <!-- Google Fonts: Bebas Neue for display, Inter for body -->
+    <!-- Fonts: Bebas Neue (display) self-hosted, Inter (body) from Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+    <!-- Preload Bebas Neue so the SAGE title renders in its final font from the start (no flash of fallback font) -->
+    <link rel="preload" href="assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">

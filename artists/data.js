@@ -3,7 +3,6 @@ var ARTISTS_DATA = {
         name: 'Groc',
         slug: 'groc',
         profileImage: '../assets/artists/groc/profile.png',
-        pageUrl: '../index.html',
         bio: 'Groc is a tattoo artist in Tel Aviv specialising in calligraphy, black work, and freehand tattoos. His approach blends flowing script with bold black ink, creating pieces that feel both precise and alive — each one drawn freehand, no stencils, no shortcuts.',
         galleryImages: [
             '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
@@ -61,7 +60,6 @@ var ARTISTS_DATA = {
         name: 'Gosha',
         slug: 'gosha',
         profileImage: '../assets/artists/gosha/profile.png',
-        pageUrl: '../index.html',
         bio: 'Gosha is a tattoo artist in Tel Aviv specialising in American Traditional tattoos. His bold lines, classic colour palettes, and timeless motifs bring old-school tattooing to Sage Tattoo Studio — crisp flash-driven designs that stay sharp for a lifetime.',
         galleryImages: [
             '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',
@@ -87,7 +85,6 @@ var ARTISTS_DATA = {
         name: 'Sunches',
         slug: 'sunches',
         profileImage: '../assets/artists/sunches/profile.png',
-        pageUrl: '../index.html',
         bio: 'Sunches works in black and grey with an illustrative style that brings depth and mood to every piece. Known for original art tattoos and palm tattoo work, she creates custom designs at Sage tattoo studio in Tel Aviv that push the boundaries of what grey-wash can do.',
         galleryImages: [
             '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg',

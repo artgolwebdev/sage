@@ -1,3 +1,18 @@
+/* ============================
+   Self-hosted display font — Bebas Neue
+   font-display: block holds text invisible (briefly) until the font
+   is ready, so the SAGE title NEVER renders in a fallback font and
+   never "jumps" from one face to another while loading.
+   ============================ */
+@font-face {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('assets/fonts/bebas-neue-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
     /* Colors */
     --bg-color: #0a0a0a;
@@ -85,10 +100,11 @@ video {
 
 .preloader-title {
     font-family: var(--font-display);
-    font-size: 4rem;
-    letter-spacing: 0.1em;
-    color: var(--text-color);
+    font-weight: 400;
+    font-size: 3rem;
     line-height: 1;
+    letter-spacing: 0.06em;
+    color: var(--text-color);
 }
 
 .preloader-bar {
@@ -189,13 +205,12 @@ video {
     grid-area: 1 / 1;
     z-index: 2;
     position: relative;
-    top: -20px;
     font-family: var(--font-display);
-    font-size: clamp(6rem, 15vw, 14rem);
-    line-height: 0.8;
-    letter-spacing: 0.05em;
+    font-weight: 400;
+    font-size: clamp(4rem, 11vw, 10rem);
+    line-height: 1;
+    letter-spacing: 0.06em;
     color: var(--text-color);
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Chaotic Overlay Videos */
@@ -976,8 +991,7 @@ video {
     border-color: var(--text-color);
 }
 
-.text-input,
-.fallback-input {
+.text-input {
     width: 100%;
     padding: 1rem;
     background: transparent;
@@ -988,8 +1002,7 @@ video {
     margin-bottom: 2rem;
 }
 
-.text-input:focus,
-.fallback-input:focus {
+.text-input:focus {
     outline: none;
     border-color: var(--accent-color);
 }
