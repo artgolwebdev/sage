@@ -519,6 +519,29 @@ video {
     object-fit: contain;
     object-position: bottom center;
     pointer-events: none;
+    z-index: 2;
+}
+
+/* --- Profile placeholder (logo) while real image lazy-loads --- */
+.artist-card-image img.lazy-profile {
+    height: 135%;
+}
+
+.artist-card-image img.lazy-profile:not(.loaded) {
+    filter: brightness(0.55) contrast(0.9);
+    opacity: 0.9;
+    animation: profilePlaceholderPulse 2.4s ease-in-out infinite;
+}
+
+.artist-card-image img.lazy-profile.loaded {
+    filter: none;
+    opacity: 1;
+    animation: none;
+}
+
+@keyframes profilePlaceholderPulse {
+    0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(0.94); }
+    50% { opacity: 0.95; transform: translateX(-50%) scale(1); }
 }
 
 .artist-card-logo {

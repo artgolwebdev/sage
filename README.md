@@ -46,3 +46,4 @@ Static HTML/CSS/JS — no build step. Serve the repo root (e.g. via XAMPP or `py
 - Improved footer navigation across Home, Artist, and Blog pages — added artist links, blog link, contact link, sitemap link.
 - Updated `sitemap.xml` with blog URL. Sitemap now contains 4 indexable URLs.
 - Added new artist **Gosha** (American Traditional style): added to `artists/data.js`, home page `script.js` ARTISTS grid, footer links (index + artist pages), and `sitemap.xml`. SEO alt/title image text targets "tattoo tel aviv".
+- Improved artist-card profile rendering: profile images now lazy-load with the logo as an instant placeholder (IntersectionObserver + `.loaded` swap), so the artist section never shows empty boxes while images load.

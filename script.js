@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="artist-card-bigname">${artist.name}</span>
                 <div class="artist-card-block"></div>
                 <div class="artist-card-image">
-                    <img class="artist-profile" src="${artist.imageSrc}" alt="${artist.alt}" title="${artist.title}" loading="${i === 0 ? 'eager' : 'lazy'}">
+                    <img class="artist-profile lazy-profile" src="assets/logo.png" data-src="${artist.imageSrc}" alt="${artist.alt}" title="${artist.title}" loading="lazy">
                     <img class="artist-card-logo" src="assets/logo.png" alt="" aria-hidden="true">
                 </div>
                 <span class="artist-card-name">${artist.name}</span>
@@ -284,6 +284,29 @@ document.addEventListener('DOMContentLoaded', () => {
             fragment.appendChild(card);
         });
         artistsGrid.appendChild(fragment);
+    }
+
+    // --- Lazy-load artist profile images with logo placeholder ---
+    const artistProfiles = artistsGrid
+        ? Array.from(artistsGrid.querySelectorAll('img.lazy-profile'))
+        : [];
+    if (artistProfiles.length && 'IntersectionObserver' in window) {
+        const profileObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const img = entry.target;
+                img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+                img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+                img.src = img.dataset.src;
+                profileObserver.unobserve(img);
+            });
+        }, { rootMargin: '300px' });
+        artistProfiles.forEach((img) => profileObserver.observe(img));
+    } else {
+        artistProfiles.forEach((img) => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        });
     }
 
     // --- Gallery & Lightbox Logic ---
