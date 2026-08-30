@@ -127,12 +127,70 @@ img {
     margin-bottom: 2rem;
 }
 
+.artist-hero-tagline {
+    display: block;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    color: var(--accent-color);
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+
+.artist-hero-lines {
+    max-width: 600px;
+}
+
+.artist-hero-lines .artist-hero-tagline {
+    display: block;
+    margin-top: 0.45rem;
+}
+
 .artist-hero-bio {
     font-family: var(--font-body);
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.7;
     color: #ccc;
     max-width: 600px;
+}
+
+.artist-hero-credit {
+    margin: 1.5rem 0 0;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    color: #ccc;
+}
+
+.artist-hero-credit a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.artist-hero-credit a:hover {
+    color: var(--text-color);
+}
+
+.artist-book-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 2rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    background: var(--accent-color);
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.artist-book-btn:hover {
+    background: var(--text-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
 /* ============================

@@ -654,6 +654,59 @@ video {
 }
 
 /* ============================
+   Artists — Mobile zigzag (max 767px)
+   Alternating left/right rhythm + slight tilt. Desktop is untouched.
+   ============================ */
+@media (max-width: 767px) {
+    .artists-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 3.5rem;
+    }
+
+    .artist-card {
+        width: 78%;
+        margin: 0;
+        padding-top: 2.5rem;
+    }
+
+    .artist-card[data-index="1"] {
+        margin-top: 0;
+    }
+
+    /* Odd cards (Groc, Gosha, Sean) → left */
+    .artist-card:nth-child(odd) {
+        align-self: flex-start;
+        transform: rotate(-2deg);
+    }
+
+    /* Even cards (Sunches, Lion) → right */
+    .artist-card:nth-child(even) {
+        align-self: flex-end;
+        align-items: flex-end;
+        transform: rotate(2.5deg);
+    }
+
+    /* Gentle size variation for rhythm */
+    .artist-card:nth-child(2),
+    .artist-card:nth-child(4) {
+        width: 70%;
+    }
+
+    .artist-card:nth-child(3) {
+        width: 74%;
+    }
+
+    /* Let the sage image scale with the card while keeping its bleed treatment */
+    .artist-card-image {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        aspect-ratio: 1;
+    }
+}
+
+/* ============================
    4. Gallery (Marquee)
    ============================ */
 .gallery-section {

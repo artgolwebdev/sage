@@ -242,23 +242,37 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: 'Groc',
             imageSrc: 'assets/artists/groc/profile.png',
-            pageUrl: 'artists/artist.html?name=groc',
+            pageUrl: 'artists/groc.html',
             alt: 'Groc, tattoo artist at Sage Tattoo Studio, Tel Aviv',
             title: 'Groc - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
         },
         {
             name: 'Sunches',
             imageSrc: 'assets/artists/sunches/profile.png',
-            pageUrl: 'artists/artist.html?name=sunches',
+            pageUrl: 'artists/sunches.html',
             alt: 'Sunches, tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Sunches - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
         },
         {
             name: 'Gosha',
             imageSrc: 'assets/artists/gosha/profile.png',
-            pageUrl: 'artists/artist.html?name=gosha',
+            pageUrl: 'artists/gosha.html',
             alt: 'Gosha, American Traditional tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Gosha - American Traditional Tattoo Artist Tel Aviv - Sage Tattoo Studio'
+        },
+        {
+            name: 'Lion',
+            imageSrc: 'assets/artists/lion/profile.png',
+            pageUrl: 'artists/lion.html',
+            alt: 'Lion, dark organic and engraved black tattoo artist in Tel Aviv at Sage Tattoo Studio',
+            title: 'Lion - Dark Organic Tattoo Artist Tel Aviv - Sage Tattoo Studio'
+        },
+        {
+            name: 'Sean Misiuk',
+            imageSrc: 'assets/artists/sean/profile.png',
+            pageUrl: 'artists/sean.html',
+            alt: 'Sean Misiuk, ornamental tattoo artist in Tel Aviv at Sage Tattoo Studio',
+            title: 'Sean Misiuk - Ornamental Tattoo Artist Tel Aviv - Sage Tattoo Studio'
         }
     ];
 
