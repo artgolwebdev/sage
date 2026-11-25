@@ -4,30 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | SAGE Tattoo Studio in Tel Aviv</title>
+    <title>404 — Page Not Found | SAGE Tattoo Studio in Tel Aviv</title>
     <meta name="description"
-        content="This page doesn't exist, but we do. Visit SAGE, a tattoo and piercing studio in Tel Aviv-Yaffo.">
-    <meta name="robots" content="noindex">
-    <link rel="canonical" href="https://sagetattoo.shop/404.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="SAGE Tattoo Studio Tel Aviv">
-    <meta property="og:title" content="404 - Page Not Found | SAGE Tattoo Studio in Tel Aviv">
-    <meta property="og:description"
-        content="This page doesn't exist, but we do. Visit SAGE, a tattoo and piercing studio in Tel Aviv-Yaffo.">
-    <meta property="og:url" content="https://sagetattoo.shop/404.html">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="404 - Page Not Found | SAGE Tattoo Studio in Tel Aviv">
-    <meta name="twitter:description"
-        content="This page doesn't exist, but we do. Visit SAGE, a tattoo and piercing studio in Tel Aviv-Yaffo.">
+        content="This page doesn't exist, but we do. Browse tattoo work, meet the artists, or book at SAGE Tattoo Studio in Tel Aviv-Yaffo.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20261125i">
+    <style>
+        .notfound {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 4rem var(--global-padding);
+            text-align: center;
+        }
+
+        .notfound-code {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 20vw, 11rem);
+            line-height: 0.85;
+            letter-spacing: 0.04em;
+            color: var(--accent-color);
+        }
+
+        .notfound-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .notfound-text {
+            color: #bdbdbd;
+            max-width: 44ch;
+            line-height: 1.65;
+        }
+
+        .notfound-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .notfound-links a {
+            padding: 0.8rem 1.4rem;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .notfound-links a:hover,
+        .notfound-links a:focus-visible {
+            border-color: var(--text-color);
+        }
+
+        .notfound-links a.primary {
+            background: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .notfound-links a.primary:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+    </style>
 </head>
 
 <body>
-    <main class="container" style="text-align: center; padding-top: 6rem; padding-bottom: 6rem;">
-        <h1 style="font-family: var(--font-display); font-size: clamp(4rem, 12vw, 8rem); line-height: 1; letter-spacing: 0.05em; margin-bottom: 1rem;">404</h1>
-        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">This page doesn't exist, but we do &mdash; SAGE tattoo studio in Tel Aviv.</p>
-        <a href="/" class="btn" style="flex: 0 0 auto; display: inline-block; text-decoration: none;">Back to SAGE</a>
+    <main class="notfound">
+        <p class="notfound-code">404</p>
+        <h1 class="notfound-title">This page moved on</h1>
+        <p class="notfound-text">The page you were looking for doesn't exist anymore — but the studio is still on Eilat
+            Street 22 in Tel Aviv-Yaffo, and the work is all still here.</p>
+        <div class="notfound-links">
+            <a class="primary" href="/">Home</a>
+            <a href="index.html#gallery">See the work</a>
+            <a href="index.html#artists">Artists</a>
+            <a href="index.html#booking">Book a tattoo</a>
+        </div>
     </main>
 </body>
 

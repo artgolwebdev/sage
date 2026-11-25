@@ -1,6 +1,17 @@
 {
   "name": "sagetattooshop-lp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "SAGE Tattoo Studio landing page — static site on GitHub Pages"
+  "description": "SAGE Tattoo Studio landing page — static site on GitHub Pages",
+  "scripts": {
+    "serve": "python -m http.server 8123 --bind 127.0.0.1",
+    "media": "node tools/optimize-media.mjs",
+    "media:images": "node tools/optimize-media.mjs --images",
+    "media:video": "node tools/optimize-media.mjs --video",
+    "markup": "node tools/build-markup.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0"
+  }
 }

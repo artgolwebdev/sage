@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://sagetattoo.shop/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sagetattoo.shop/assets/images/1-960.webp</image:loc>
+      <image:title>Tattoo work at SAGE Tattoo Studio in Tel Aviv</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagetattoo.shop/artists/groc.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sagetattoo.shop/artists/sunches.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sagetattoo.shop/artists/gosha.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sagetattoo.shop/artists/lion.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sagetattoo.shop/artists/sean.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sagetattoo.shop/blog/tattoos-in-tel-aviv.html</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sagetattoo.shop/privacy.html</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

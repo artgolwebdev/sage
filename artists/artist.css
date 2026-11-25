@@ -71,6 +71,41 @@ img {
     z-index: 100;
 }
 
+.artist-header-book {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    white-space: nowrap;
+}
+
+.artist-header-book:hover {
+    background-color: var(--accent-color);
+}
+
+.artist-hero-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    padding: 0.9rem 1.6rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.artist-hero-book:hover {
+    background-color: var(--accent-color);
+}
+
 .artist-header-back {
     display: inline-flex;
     align-items: center;

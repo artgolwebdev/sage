@@ -16,31 +16,58 @@
     <meta property="og:description"
         content="Inside SAGE — a tattoo, piercing, and fine art studio in Tel Aviv-Yafo. How to choose a studio, the city's tattoo styles, and how to book your session.">
     <meta property="og:url" content="https://sagetattoo.shop/blog/tattoos-in-tel-aviv.html">
-    <meta property="og:image" content="https://sagetattoo.shop/assets/images/1.jpg">
-    <meta property="og:image:width" content="1170">
-    <meta property="og:image:height" content="1560">
+    <meta property="og:image" content="https://sagetattoo.shop/assets/og/blog-tattoos-in-tel-aviv.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Tattoo work at SAGE Tattoo Studio in Tel Aviv">
+    <meta property="article:published_time" content="2026-08-13">
+    <meta property="article:modified_time" content="2026-08-13">
+    <meta property="article:author" content="SAGE Tattoo Studio">
+    <meta name="theme-color" content="#0a0a0a">
     <meta property="og:locale" content="en_US">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tattoos in Tel Aviv | SAGE Tattoo Studio">
     <meta name="twitter:description"
         content="Inside SAGE — a tattoo, piercing, and fine art studio in Tel Aviv-Yafo. How to choose a studio, the city's tattoo styles, and how to book your session.">
-    <meta name="twitter:image" content="https://sagetattoo.shop/assets/images/1.jpg">
+    <meta name="twitter:image" content="https://sagetattoo.shop/assets/og/blog-tattoos-in-tel-aviv.jpg">
+    <meta name="twitter:image:alt" content="Tattoo work at SAGE Tattoo Studio in Tel Aviv">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="../assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="blog.css?v=20261125i">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3FE88WPKJ"></script>
+    <!-- Analytics: loaded only after the visitor accepts (Consent Mode v2) -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-N3FE88WPKJ');
+        (function () {
+            var GA_ID = 'G-N3FE88WPKJ';
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied'
+            });
+            gtag('js', new Date());
+            window.__sageLoadAnalytics = function () {
+                if (document.querySelector('script[data-ga]')) return;
+                var s = document.createElement('script');
+                s.async = true;
+                s.setAttribute('data-ga', '1');
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                document.head.appendChild(s);
+                gtag('config', GA_ID, { anonymize_ip: true });
+            };
+            try {
+                if (localStorage.getItem('sage_cookie_consent') === 'accepted') {
+                    window.__sageLoadAnalytics();
+                }
+            } catch (e) { /* storage blocked */ }
+        })();
     </script>
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -127,7 +154,7 @@
             </div>
 
             <figure class="blog-hero-image">
-                <img src="../assets/images/1.jpg" width="1170" height="1560" alt="Tattoo work at SAGE, a tattoo studio in Tel Aviv" loading="eager" title="Tattoo work - SAGE Tattoo Studio Tel Aviv">
+                <img src="../assets/images/1.jpg" width="1170" height="1560" alt="Tattoo work at SAGE, a tattoo studio in Tel Aviv" loading="eager">
             </figure>
 
             <div class="blog-content">
@@ -141,9 +168,9 @@
                 <p>Not every studio in Tel Aviv works the same way. Some are walk-in friendly, others are appointment-only and booked out weeks in advance. Hygiene standards, sterilization practices, and the artist's actual portfolio matter more than a studio's Instagram follower count. Before booking, look at healed work — not just fresh photos — and ask about the artist's specific style focus.</p>
 
                 <div class="blog-gallery blog-gallery-3">
-                    <img src="../assets/images/2.jpg" width="1170" height="1556" loading="lazy" alt="Detailed tattoo line work by SAGE Tel Aviv studio" title="Detailed tattoo line work - SAGE Tel Aviv">
-                    <img src="../assets/images/3.jpg" width="1170" height="1560" loading="lazy" alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo" title="Custom tattoo design - SAGE Tattoo Tel Aviv">
-                    <img src="../assets/images/4.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists" title="Tattoo shading detail - SAGE Tel Aviv">
+                    <img src="../assets/images/2.jpg" width="1170" height="1556" loading="lazy" alt="Detailed tattoo line work by SAGE Tel Aviv studio">
+                    <img src="../assets/images/3.jpg" width="1170" height="1560" loading="lazy" alt="Custom tattoo design by SAGE tattoo shop Tel Aviv Yaffo">
+                    <img src="../assets/images/4.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo shading detail by SAGE Tel Aviv tattoo artists">
                 </div>
 
                 <h2>Styles You'll Find in Tel Aviv</h2>
@@ -151,9 +178,9 @@
                 <p>The city's tattoo culture leans heavily into fine art and custom design rather than flash-off-the-wall pieces. Common styles include fine-line and single-needle work, bold traditional and neo-traditional pieces, blackwork and dotwork, and illustrative custom pieces built around a client's own sketch or reference. A good studio will help you develop an idea into a design that actually works on skin — not just resize a picture you found online.</p>
 
                 <div class="blog-gallery blog-gallery-3">
-                    <img src="../assets/images/7.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo portfolio piece from SAGE Tel Aviv studio" title="Tattoo portfolio piece - SAGE Tel Aviv">
-                    <img src="../assets/images/8.jpg" width="1170" height="1554" loading="lazy" alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv" title="Fine line tattoo - SAGE Tel Aviv">
-                    <img src="../assets/images/9.jpg" width="1170" height="1554" loading="lazy" alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio" title="Coloured tattoo work - SAGE Tel Aviv">
+                    <img src="../assets/images/7.jpg" width="1170" height="1554" loading="lazy" alt="Tattoo portfolio piece from SAGE Tel Aviv studio">
+                    <img src="../assets/images/8.jpg" width="1170" height="1554" loading="lazy" alt="Fine line tattoo by SAGE, a tattoo in Tel Aviv">
+                    <img src="../assets/images/9.jpg" width="1170" height="1554" loading="lazy" alt="Coloured tattoo work by SAGE Tel Aviv tattoo studio">
                 </div>
 
                 <h2>Tattoos at SAGE</h2>
@@ -166,8 +193,8 @@
                 </div>
 
                 <div class="blog-gallery blog-gallery-2">
-                    <img src="../assets/images/1.jpg" width="1170" height="1560" loading="lazy" alt="Close-up tattoo ink work by SAGE Tel Aviv studio" title="Close-up tattoo ink work - SAGE Tel Aviv">
-                    <img src="../assets/images/5.jpg" width="1170" height="1170" loading="lazy" alt="Tattoo artwork in progress at SAGE Tel Aviv studio" title="Tattoo artwork in progress - SAGE Tel Aviv">
+                    <img src="../assets/images/1.jpg" width="1170" height="1560" loading="lazy" alt="Close-up tattoo ink work by SAGE Tel Aviv studio">
+                    <img src="../assets/images/5.jpg" width="1170" height="1170" loading="lazy" alt="Tattoo artwork in progress at SAGE Tel Aviv studio">
                 </div>
 
                 <h2>Booking a Tattoo in Tel Aviv</h2>
@@ -200,6 +227,7 @@
                     <a href="../index.html" class="footer-link">Home</a>
                     <a href="../index.html#artists" class="footer-link">Artists</a>
                     <a href="../index.html#contact" class="footer-link">Contact</a>
+                    <a href="../privacy.html" class="footer-link">Privacy</a>
                     <a href="../sitemap.xml" class="footer-link">Sitemap</a>
                 </nav>
                 <div class="footer-col">

@@ -1,91 +1,148 @@
-// --- Random hero background video ---
-const HERO_VIDEO_OPTIONS = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4', '9.mp4', '10.mp4', '11.mp4', '12.mp4'];
-const HERO_VIDEO_DIR = 'assets/videos/random/';
-const DEFAULT_HERO_VIDEO = HERO_VIDEO_OPTIONS[0];
+// --- Hero background video (loaded after paint, never blocks content) ---
+// Each slot prefers the compressed loop and falls back to the original clip
+// that has always shipped with the site, so a missing file never kills the hero.
+const HERO_VIDEO_COUNT = 12;
+const heroCandidates = (n) => [
+    `assets/videos/hero/${n}.mp4`,
+    // Small tracked clip from the original site, used only if the compressed
+    // file is missing from the deployment.
+    'assets/videos/random/1.mp4'
+];
+const OVERLAY_CANDIDATES = [
+    ['assets/videos/overlay/2.mp4'],
+    ['assets/videos/overlay/3.mp4']
+];
 const heroVideo = document.getElementById('hero-bg-video');
+const connection = navigator.connection || {};
+const saveData = Boolean(connection.saveData);
+const slowConnection = /(^|-)2g$/.test(connection.effectiveType || '');
+const allowMotion = !saveData && !slowConnection;
 
-function setHeroVideoSource(src) {
-    if (!heroVideo) return;
-    while (heroVideo.firstChild) {
-        heroVideo.removeChild(heroVideo.firstChild);
-    }
-    const source = document.createElement('source');
-    source.src = src;
-    source.type = 'video/mp4';
-    source.addEventListener('error', () => {
-        if (src !== HERO_VIDEO_DIR + DEFAULT_HERO_VIDEO) {
-            setHeroVideoSource(HERO_VIDEO_DIR + DEFAULT_HERO_VIDEO);
-        }
+function attemptPlay(video) {
+    if (!video) return Promise.resolve(false);
+    const p = video.play();
+    if (!p || typeof p.catch !== 'function') return Promise.resolve(true);
+    return p.then(() => true).catch(() => false);
+}
+
+/** Point the element at a file and resolve once it can actually play. */
+function loadVideo(video, src) {
+    return new Promise((resolve) => {
+        let settled = false;
+        const finish = (ok) => {
+            if (settled) return;
+            settled = true;
+            video.removeEventListener('canplay', onReady);
+            video.removeEventListener('loadeddata', onReady);
+            video.removeEventListener('error', onError);
+            clearTimeout(timer);
+            resolve(ok);
+        };
+        const onReady = () => finish(true);
+        const onError = () => finish(false);
+        // Never let a stalled request block the hero forever.
+        const timer = setTimeout(() => finish(video.readyState >= 2), 8000);
+
+        video.addEventListener('canplay', onReady);
+        video.addEventListener('loadeddata', onReady);
+        video.addEventListener('error', onError);
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.preload = 'auto';
+        video.src = src;
+        video.load();
     });
-    heroVideo.appendChild(source);
-    heroVideo.load();
+}
+
+async function playVideoWithFallbacks(video, preferredSrc, fallbacks) {
+    const candidates = [preferredSrc, ...fallbacks];
+    for (const src of candidates) {
+        if (!src) continue;
+        // eslint-disable-next-line no-await-in-loop
+        const ready = await loadVideo(video, src);
+        if (!ready) continue;
+        // eslint-disable-next-line no-await-in-loop
+        if (await attemptPlay(video)) return true;
+    }
+    return false;
+}
+
+async function startHeroMedia(force) {
+    const canPlay = force || allowMotion;
+    if (!heroVideo) return;
+
+    if (canPlay && !heroVideo.currentSrc) {
+        const pick = Math.floor(Math.random() * HERO_VIDEO_COUNT) + 1;
+        const candidates = heroCandidates(pick);
+        const ok = await playVideoWithFallbacks(heroVideo, candidates[0], candidates.slice(1));
+        if (!ok) console.warn('[hero] video could not start; poster stays visible');
+    }
+
+    // Decorative overlay clips: every viewport, but never on save-data.
+    if (canPlay) {
+        document.querySelectorAll('.chaotic-video').forEach(async (video) => {
+            if (video.currentSrc) return;
+            const pair = OVERLAY_CANDIDATES[Number(video.dataset.index || 0)] || [];
+            const ok = await playVideoWithFallbacks(video, pair[0], pair.slice(1));
+            if (!ok) video.hidden = true;
+        });
+    }
+}
+
+// Chrome/Safari sometimes pause a muted loop on their own (power saving, no
+// focus, backgrounding). Nudge it back to playing, throttled.
+let heroAutoResumes = 0;
+let lastHeroResume = 0;
+
+function resumeHeroIfPaused() {
+    if (!heroVideo || heroVideo.ended) return;
+    if (!heroVideo.paused || !heroVideo.currentSrc) return;
+    const now = Date.now();
+    if (now - lastHeroResume < 2000 || heroAutoResumes >= 20) return;
+    lastHeroResume = now;
+    heroAutoResumes += 1;
+    attemptPlay(heroVideo);
 }
 
 if (heroVideo) {
-    const randomIndex = Math.floor(Math.random() * HERO_VIDEO_OPTIONS.length);
-    setHeroVideoSource(HERO_VIDEO_DIR + HERO_VIDEO_OPTIONS[randomIndex]);
+    heroVideo.addEventListener('pause', () => {
+        if (document.hidden) return;
+        setTimeout(resumeHeroIfPaused, 250);
+    });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Preloader Logic ---
-    const preloader = document.getElementById('preloader');
-    const preloaderProgress = document.getElementById('preloader-progress');
+// One tap/scroll anywhere also starts the hero on browsers that refuse muted
+// autoplay (iOS Low Power Mode is the common one).
+['pointerdown', 'touchstart', 'keydown', 'wheel'].forEach((eventName) => {
+    window.addEventListener(eventName, resumeHeroIfPaused, { once: true, passive: true });
+});
 
-    const assetsToLoad = [
-        { type: 'video', el: document.getElementById('hero-bg-video') },
-        { type: 'video', el: document.getElementById('hero-cv-1') },
-        { type: 'video', el: document.getElementById('hero-cv-2') },
-        { type: 'image', el: document.getElementById('hero-img') }
-    ];
-
-    let loadedCount = 0;
-    const totalAssets = assetsToLoad.length;
-    let isLoaded = false;
-
-    function finishLoading() {
-        if (isLoaded) return;
-        isLoaded = true;
-        if (preloaderProgress) preloaderProgress.style.width = '100%';
-        setTimeout(() => {
-            if (preloader) preloader.classList.add('fade-out');
-        }, 300);
-    }
-
-    function updatePreloaderProgress() {
-        loadedCount++;
-        const percentage = (loadedCount / totalAssets) * 100;
-        if (preloaderProgress) preloaderProgress.style.width = `${percentage}%`;
-        if (loadedCount >= totalAssets) {
-            finishLoading();
-        }
-    }
-
-    // Fallback timeout (5 seconds)
-    setTimeout(finishLoading, 5000);
-
-    // Track each asset
-    assetsToLoad.forEach(asset => {
-        if (!asset.el) {
-            updatePreloaderProgress();
-            return;
-        }
-
-        if (asset.type === 'video') {
-            if (asset.el.readyState >= 3) { // HAVE_FUTURE_DATA
-                updatePreloaderProgress();
-            } else {
-                asset.el.addEventListener('canplaythrough', updatePreloaderProgress, { once: true });
-                asset.el.addEventListener('error', updatePreloaderProgress, { once: true });
-            }
-        } else if (asset.type === 'image') {
-            if (asset.el.complete) {
-                updatePreloaderProgress();
-            } else {
-                asset.el.addEventListener('load', updatePreloaderProgress, { once: true });
-                asset.el.addEventListener('error', updatePreloaderProgress, { once: true });
-            }
+// Some browsers pause background video on their own when a tab is hidden or
+// the page loses the compositor. Resume it when the visitor comes back.
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden || !allowMotion) return;
+    [heroVideo, ...document.querySelectorAll('.chaotic-video')].forEach((video) => {
+        if (video && video.currentSrc && video.paused && video.readyState >= 2) {
+            attemptPlay(video);
         }
     });
+});
+
+/** Start the hero as soon as the markup is parsed (this script sits at the
+ *  end of <body>), without waiting on the idle queue. */
+startHeroMedia(false);
+
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Analytics helper: one place for conversion events ---
+    function track(name, params) {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', name, params || {});
+        }
+    }
 
     // --- Booking Form Logic ---
     const form = document.getElementById('booking-form');
@@ -107,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateProgress() {
         const percentage = (currentStep / totalSteps) * 100;
         progressIndicator.style.width = `${percentage}%`;
-        progressText.textContent = `${currentStep}/${totalSteps}`;
+        progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
     }
 
     // Show specific step
@@ -149,11 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextBtn = group.closest('.form-step').querySelector('.next-btn');
 
         chips.forEach(chip => {
+            chip.setAttribute('aria-pressed', 'false');
             chip.addEventListener('click', () => {
                 // Remove selected from all
-                chips.forEach(c => c.classList.remove('selected'));
+                chips.forEach(c => {
+                    c.classList.remove('selected');
+                    c.setAttribute('aria-pressed', 'false');
+                });
                 // Add to clicked
                 chip.classList.add('selected');
+                chip.setAttribute('aria-pressed', 'true');
 
                 const val = chip.getAttribute('data-value');
                 formData[dataKey] = val;
@@ -233,6 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const encodedMessage = encodeURIComponent(rawMessage);
         const waUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
 
+        track('booking_request', {
+            placement: formData.placement,
+            size: formData.size
+        });
+
         // Redirect
         window.location.href = waUrl;
     });
@@ -241,35 +308,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const ARTISTS = [
         {
             name: 'Groc',
-            imageSrc: 'assets/artists/groc/profile.png',
+            imageSrc: 'assets/artists/groc/profile-480.webp',
             pageUrl: 'artists/groc.html',
             alt: 'Groc, tattoo artist at Sage Tattoo Studio, Tel Aviv',
             title: 'Groc - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
         },
         {
             name: 'Sunches',
-            imageSrc: 'assets/artists/sunches/profile.png',
+            imageSrc: 'assets/artists/sunches/profile-480.webp',
             pageUrl: 'artists/sunches.html',
             alt: 'Sunches, tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Sunches - Tattoo Artist - Sage Tattoo Studio Tel Aviv'
         },
         {
             name: 'Gosha',
-            imageSrc: 'assets/artists/gosha/profile.png',
+            imageSrc: 'assets/artists/gosha/profile-480.webp',
             pageUrl: 'artists/gosha.html',
             alt: 'Gosha, American Traditional tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Gosha - American Traditional Tattoo Artist Tel Aviv - Sage Tattoo Studio'
         },
         {
             name: 'Lion',
-            imageSrc: 'assets/artists/lion/profile.png',
+            imageSrc: 'assets/artists/lion/profile-480.webp',
             pageUrl: 'artists/lion.html',
             alt: 'Lion, dark organic and engraved black tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Lion - Dark Organic Tattoo Artist Tel Aviv - Sage Tattoo Studio'
         },
         {
             name: 'Sean Misiuk',
-            imageSrc: 'assets/artists/sean/profile.png',
+            imageSrc: 'assets/artists/sean/profile-480.webp',
             pageUrl: 'artists/sean.html',
             alt: 'Sean Misiuk, ornamental tattoo artist in Tel Aviv at Sage Tattoo Studio',
             title: 'Sean Misiuk - Ornamental Tattoo Artist Tel Aviv - Sage Tattoo Studio'
@@ -285,12 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
             card.href = artist.pageUrl;
             card.dataset.index = i;
 
+            card.addEventListener('click', () => track('artist_card_click', { artist: artist.name }));
+
             card.innerHTML = `
                 <span class="artist-card-bigname">${artist.name}</span>
                 <div class="artist-card-block"></div>
                 <div class="artist-card-image">
-                    <img class="artist-profile lazy-profile" src="assets/logo.png" data-src="${artist.imageSrc}" alt="${artist.alt}" title="${artist.title}" loading="lazy">
-                    <img class="artist-card-logo" src="assets/logo.png" alt="" aria-hidden="true">
+                    <img class="artist-profile lazy-profile" src="${artist.imageSrc}" alt="${artist.alt}" width="480" height="480" loading="lazy" decoding="async">
+                    <img class="artist-card-logo" src="assets/logo-96.webp" alt="" aria-hidden="true" width="96" height="96" loading="lazy">
                 </div>
                 <span class="artist-card-name">${artist.name}</span>
                 <span class="artist-card-btn">See More</span>
@@ -300,60 +369,48 @@ document.addEventListener('DOMContentLoaded', () => {
         artistsGrid.appendChild(fragment);
     }
 
-    // --- Lazy-load artist profile images with logo placeholder ---
+    // --- Artist profile reveal ---
     const artistProfiles = artistsGrid
         ? Array.from(artistsGrid.querySelectorAll('img.lazy-profile'))
         : [];
-    if (artistProfiles.length && 'IntersectionObserver' in window) {
-        const profileObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                const img = entry.target;
-                img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-                img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
-                img.src = img.dataset.src;
-                profileObserver.unobserve(img);
-            });
-        }, { rootMargin: '300px' });
-        artistProfiles.forEach((img) => profileObserver.observe(img));
-    } else {
-        artistProfiles.forEach((img) => {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-        });
-    }
+    artistProfiles.forEach((img) => {
+        const done = () => img.classList.add('loaded');
+        if (img.complete && img.naturalWidth > 0) {
+            done();
+        } else {
+            img.addEventListener('load', done, { once: true });
+            img.addEventListener('error', done, { once: true });
+        }
+    });
 
     // --- Gallery & Lightbox Logic ---
     const marqueeContainer = document.querySelector('.marquee-container');
     const marqueeContent = document.querySelector('.marquee-content');
     const galleryImages = Array.from(marqueeContent.querySelectorAll('img'));
 
-    // --- Shuffle gallery order on each page load ---
-    const half = galleryImages.length / 2;
-    const attrs = galleryImages.slice(0, half).map(img => ({
-        src: img.getAttribute('src'),
-        dataSrc: img.getAttribute('data-src'),
-        alt: img.getAttribute('alt'),
-        title: img.getAttribute('title')
-    }));
-    for (let i = attrs.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [attrs[i], attrs[j]] = [attrs[j], attrs[i]];
+    // --- Reveal tiles as they decode (CSS blur placeholder until then) ---
+    function reveal(img) {
+        const done = () => img.classList.add('loaded');
+        if (img.complete && img.naturalWidth > 0) {
+            done();
+            return;
+        }
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
     }
-    galleryImages.forEach((img, i) => {
-        const a = attrs[i % attrs.length];
-        img.setAttribute('src', a.src);
-        img.setAttribute('data-src', a.dataSrc);
-        img.setAttribute('alt', a.alt);
-        img.setAttribute('title', a.title);
-    });
+    galleryImages.forEach(reveal);
 
-    // --- Load all gallery images eagerly (IntersectionObserver doesn't work with CSS transform scrolling) ---
-    const lazyImages = marqueeContent.querySelectorAll('img.lazy');
-    lazyImages.forEach(img => {
-        img.src = img.dataset.src;
-        img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-        img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+    // --- Duplicate the track once at runtime for the seamless loop.
+    //     The HTML only carries one set, so the document stays light and
+    //     crawlers never see duplicated images. ---
+    galleryImages.forEach((img, i) => {
+        const clone = img.cloneNode(true);
+        clone.setAttribute('alt', '');
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('loading', 'lazy');
+        clone.dataset.cloneOf = String(i);
+        marqueeContent.appendChild(clone);
+        reveal(clone);
     });
 
     // --- About-strip background image: lazy load via CSS custom property ---
@@ -362,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const aboutObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.setProperty('--about-bg', 'url(assets/about-strip.png)');
+                    entry.target.style.setProperty('--about-bg', 'url(assets/about-strip-960.webp)');
                     entry.target.classList.add('bg-loaded');
                     aboutObserver.unobserve(entry.target);
                 }
@@ -370,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { rootMargin: '200px' });
         aboutObserver.observe(aboutSection);
     } else if (aboutSection) {
-        aboutSection.style.setProperty('--about-bg', 'url(assets/about-strip.png)');
+        aboutSection.style.setProperty('--about-bg', 'url(assets/about-strip-960.webp)');
         aboutSection.classList.add('bg-loaded');
     }
 
@@ -387,7 +444,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return marqueeContent.scrollWidth / 2;
     }
 
+    let marqueeRunning = false;
+
     function animateMarquee() {
+        if (!marqueeRunning) return;
+
         if (!isDragging) {
             currentTranslate -= autoScrollSpeed;
         }
@@ -405,10 +466,30 @@ document.addEventListener('DOMContentLoaded', () => {
         animationId = requestAnimationFrame(animateMarquee);
     }
 
-    // Start auto-scroll
-    setTimeout(() => {
+    function startMarquee() {
+        if (!allowMotion || marqueeRunning) return;
+        marqueeRunning = true;
         animationId = requestAnimationFrame(animateMarquee);
-    }, 100);
+    }
+
+    function stopMarquee() {
+        marqueeRunning = false;
+        if (animationId) cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+
+    // Only animate while the strip is on screen and the tab is visible.
+    if (allowMotion && 'IntersectionObserver' in window) {
+        const marqueeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => (entry.isIntersecting ? startMarquee() : stopMarquee()));
+        }, { rootMargin: '150px' });
+        marqueeObserver.observe(marqueeContainer);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopMarquee();
+        else if (allowMotion) startMarquee();
+    });
 
     function pauseAutoScroll() {
         isDragging = true;
@@ -440,6 +521,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isDragging || !marqueeContainer.hasPointerCapture(e.pointerId)) return;
         const deltaX = e.clientX - startX;
         currentTranslate = prevTranslate + deltaX;
+        // Apply immediately so dragging still works with reduced motion.
+        marqueeContent.style.transform = `translateX(${currentTranslate}px)`;
 
         if (Math.abs(deltaX) > 5) {
             hasDragged = true;
@@ -455,7 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hasDragged && clickTarget && clickTarget.tagName.toLowerCase() === 'img') {
                 const idx = galleryImages.indexOf(clickTarget);
                 if (idx > -1) {
-                    openLightbox(idx % uniqueImages.length);
+                    openLightbox(idx);
+                } else if (clickTarget.dataset.cloneOf !== undefined) {
+                    openLightbox(Number(clickTarget.dataset.cloneOf));
                 }
             }
         }
@@ -476,28 +561,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxNext = document.getElementById('lightbox-next');
 
     let currentLightboxIndex = 0;
-    const uniqueImages = galleryImages.slice(0, galleryImages.length / 2);
+    const uniqueImages = galleryImages;
+
+    function fullSrc(index) {
+        const img = uniqueImages[index];
+        return img.dataset.full || img.currentSrc || img.src;
+    }
 
     function openLightbox(index) {
         currentLightboxIndex = index;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
+        lightboxImg.src = fullSrc(currentLightboxIndex);
+        lightboxImg.alt = uniqueImages[currentLightboxIndex].alt;
         lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        if (lightboxClose) lightboxClose.focus({ preventScroll: true });
     }
 
     function closeLightbox() {
         lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 
     function showNextImage() {
         currentLightboxIndex = (currentLightboxIndex + 1) % uniqueImages.length;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
+        lightboxImg.src = fullSrc(currentLightboxIndex);
+        lightboxImg.alt = uniqueImages[currentLightboxIndex].alt;
     }
 
     function showPrevImage() {
         currentLightboxIndex = (currentLightboxIndex - 1 + uniqueImages.length) % uniqueImages.length;
-        lightboxImg.src = uniqueImages[currentLightboxIndex].dataset.src;
+        lightboxImg.src = fullSrc(currentLightboxIndex);
+        lightboxImg.alt = uniqueImages[currentLightboxIndex].alt;
     }
 
     galleryImages.forEach((img) => {
@@ -548,23 +644,62 @@ document.addEventListener('DOMContentLoaded', () => {
         heroObserver.observe(heroSection);
     }
 
-    // --- Cookie Policy Banner Logic ---
+    // --- Consent banner: analytics only loads after an explicit accept ---
     const cookieBanner = document.getElementById('cookie-banner');
     const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
+    const cookieDeclineBtn = document.getElementById('cookie-decline-btn');
 
-    if (cookieBanner && cookieAcceptBtn) {
-        // Show banner if consent hasn't been saved yet
-        if (!localStorage.getItem('sage_cookie_consent')) {
+    function readConsent() {
+        try {
+            return localStorage.getItem('sage_cookie_consent');
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function saveConsent(value) {
+        try {
+            localStorage.setItem('sage_cookie_consent', value);
+        } catch (e) { /* private mode */ }
+    }
+
+    if (cookieBanner) {
+        if (!readConsent()) {
             setTimeout(() => {
                 cookieBanner.classList.remove('hidden');
             }, 600);
         }
 
-        cookieAcceptBtn.addEventListener('click', () => {
-            cookieBanner.classList.add('hidden');
-            localStorage.setItem('sage_cookie_consent', 'accepted');
-        });
+        if (cookieAcceptBtn) {
+            cookieAcceptBtn.addEventListener('click', () => {
+                cookieBanner.classList.add('hidden');
+                saveConsent('accepted');
+                if (typeof window.__sageLoadAnalytics === 'function') {
+                    window.__sageLoadAnalytics();
+                }
+            });
+        }
+
+        if (cookieDeclineBtn) {
+            cookieDeclineBtn.addEventListener('click', () => {
+                cookieBanner.classList.add('hidden');
+                saveConsent('declined');
+            });
+        }
     }
+
+    // --- Conversion tracking ---
+    document.querySelectorAll('.global-cta').forEach((link) => {
+        link.addEventListener('click', () => track('whatsapp_cta_click', { location: 'floating' }));
+    });
+
+    document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+        link.addEventListener('click', () => track('tel_click'));
+    });
+
+    document.querySelectorAll('a[href="#booking"], a[href="#artists"]').forEach((link) => {
+        link.addEventListener('click', () => track('nav_click', { target: link.getAttribute('href') }));
+    });
 
     // --- Reviews Slider Logic ---
     const REVIEWS = [
@@ -696,8 +831,18 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewsSlider.addEventListener('pointercancel', endReviewsDrag);
         reviewsSlider.addEventListener('mouseenter', stopAutoScroll);
         reviewsSlider.addEventListener('mouseleave', scheduleAutoScroll);
+        reviewsSlider.addEventListener('focusin', stopAutoScroll);
+        reviewsSlider.addEventListener('focusout', scheduleAutoScroll);
 
-        startAutoScroll();
+        if (allowMotion) startAutoScroll();
+    }
+
+    // --- Sticky navigation background once the hero is passed ---
+    const siteNav = document.getElementById('site-nav');
+    if (siteNav) {
+        const syncNav = () => siteNav.classList.toggle('is-scrolled', window.scrollY > 80);
+        syncNav();
+        window.addEventListener('scroll', syncNav, { passive: true });
     }
 
     // Initialize

@@ -16,16 +16,21 @@
     <meta property="og:description"
         content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
     <meta property="og:url" content="https://sagetattoo.shop/">
-    <meta property="og:image" content="https://sagetattoo.shop/assets/images/4.jpg">
-    <meta property="og:image:width" content="1170">
-    <meta property="og:image:height" content="1560">
+    <meta property="og:image" content="https://sagetattoo.shop/assets/og/home.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"
+        content="Tattoo work by the artists at SAGE Tattoo Studio in Tel Aviv">
     <meta property="og:locale" content="en_US">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SAGE Tattoo Studio in Tel Aviv | Tattoo & Piercing Shop">
     <meta name="twitter:description"
         content="Looking for a tattoo in Tel Aviv? SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.">
-    <meta name="twitter:image" content="https://sagetattoo.shop/assets/images/4.jpg">
+    <meta name="twitter:image" content="https://sagetattoo.shop/assets/og/home.jpg">
+    <meta name="twitter:image:alt"
+        content="Tattoo work by the artists at SAGE Tattoo Studio in Tel Aviv">
+    <meta name="theme-color" content="#0a0a0a">
     <!-- Fonts: Bebas Neue (display) self-hosted, Inter (body) from Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,100 +38,172 @@
     <link rel="preload" href="assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261125i">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3FE88WPKJ"></script>
+    <!-- Analytics: loaded only after the visitor accepts (Consent Mode v2) -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-N3FE88WPKJ');
+        (function () {
+            var GA_ID = 'G-N3FE88WPKJ';
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied'
+            });
+            gtag('js', new Date());
+            window.__sageLoadAnalytics = function () {
+                if (document.querySelector('script[data-ga]')) return;
+                var s = document.createElement('script');
+                s.async = true;
+                s.setAttribute('data-ga', '1');
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                document.head.appendChild(s);
+                gtag('config', GA_ID, { anonymize_ip: true });
+            };
+            try {
+                if (localStorage.getItem('sage_cookie_consent') === 'accepted') {
+                    window.__sageLoadAnalytics();
+                }
+            } catch (e) { /* storage blocked */ }
+        })();
     </script>
     <!-- Structured data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "TattooParlor",
-        "name": "SAGE",
-        "description": "SAGE is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.",
-        "url": "https://sagetattoo.shop/",
-        "image": "https://sagetattoo.shop/assets/logo.png",
-        "telephone": "+972526504348",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Eilat Street 22",
-            "addressLocality": "Tel Aviv-Yaffo",
-            "addressRegion": "Tel Aviv District",
-            "addressCountry": "IL"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 32.05710607396655,
-            "longitude": 34.76214307559135
-        },
-        "areaServed": {
-            "@type": "City",
-            "name": "Tel Aviv",
-            "url": "https://en.wikipedia.org/wiki/Tel_Aviv"
-        },
-        "hasMap": "https://www.google.com/maps/search/SAGE+Tattoo+Studio+Eilat+Street+22+Tel+Aviv",
-        "sameAs": [
-            "https://www.instagram.com/sage.tattooshop/"
+        "@graph": [
+            {
+                "@type": "TattooParlor",
+                "@id": "https://sagetattoo.shop/#studio",
+                "name": "SAGE Tattoo Studio",
+                "alternateName": "SAGE",
+                "description": "SAGE Tattoo Studio is a tattoo studio, piercing shop, and fine art gallery in Tel Aviv-Yaffo. Walk-ins welcome, guest spots open.",
+                "url": "https://sagetattoo.shop/",
+                "image": [
+                    "https://sagetattoo.shop/assets/og/home.jpg",
+                    "https://sagetattoo.shop/assets/images/4.jpg",
+                    "https://sagetattoo.shop/assets/images/1.jpg"
+                ],
+                "logo": "https://sagetattoo.shop/assets/logo.png",
+                "telephone": "+972526504348",
+                "priceRange": "₪₪",
+                "currenciesAccepted": "ILS",
+                "paymentAccepted": "Cash, Credit Card, Bit",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Eilat Street 22",
+                    "addressLocality": "Tel Aviv-Yaffo",
+                    "addressRegion": "Tel Aviv District",
+                    "addressCountry": "IL"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 32.05710607396655,
+                    "longitude": 34.76214307559135
+                },
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Tel Aviv",
+                    "url": "https://en.wikipedia.org/wiki/Tel_Aviv"
+                },
+                "hasMap": "https://www.google.com/maps/search/SAGE+Tattoo+Studio+Eilat+Street+22+Tel+Aviv",
+                "sameAs": [
+                    "https://www.instagram.com/sage.tattooshop/"
+                ],
+                "makesOffer": [
+                    {
+                        "@type": "Offer",
+                        "itemOffered": { "@type": "Service", "name": "Custom tattoo" }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": { "@type": "Service", "name": "Piercing" }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": { "@type": "Service", "name": "Fine art gallery" }
+                    }
+                ],
+                "potentialAction": {
+                    "@type": "ReserveAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://wa.me/972526504348",
+                        "actionPlatform": "https://schema.org/MobileWebPlatform"
+                    }
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://sagetattoo.shop/#website",
+                "name": "SAGE Tattoo Studio",
+                "url": "https://sagetattoo.shop/",
+                "publisher": { "@id": "https://sagetattoo.shop/#studio" },
+                "inLanguage": "en"
+            }
         ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "SAGE Tattoo Studio Tel Aviv",
-        "url": "https://sagetattoo.shop/"
     }
     </script>
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-title">SAGE</div>
-            <div class="preloader-bar">
-                <div class="preloader-progress" id="preloader-progress"></div>
-            </div>
-        </div>
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Site navigation -->
+    <header class="site-nav" id="site-nav">
+        <a href="index.html" class="site-nav-brand">SAGE<span class="sr-only"> Tattoo Studio Tel Aviv</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="#gallery">Work</a>
+            <a href="#artists">Artists</a>
+            <a href="#reviews" class="nav-secondary">Reviews</a>
+            <a href="#booking">Book</a>
+            <a href="tel:+972526504348" class="nav-phone">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" aria-hidden="true">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                <span class="sr-only">Call SAGE Tattoo Studio</span>
+            </a>
+        </nav>
+    </header>
 
     <!-- 1. Hero Section -->
     <header class="hero" id="hero">
-        <video class="hero-video" id="hero-bg-video" autoplay muted loop playsinline poster="assets/images/1.jpg" title="Sage Tattoo Studio Tel Aviv - tattoo shop showcase video" aria-label="Background video showcasing tattoo work at Sage Tattoo Studio in Tel Aviv">
+        <video class="hero-video" id="hero-bg-video" autoplay muted loop playsinline preload="auto"
+            webkit-playsinline poster="assets/images/1.jpg"
+            aria-label="Background video showcasing tattoo work at Sage Tattoo Studio in Tel Aviv">
         </video>
         <div class="hero-overlay"></div>
 
         <!-- Chaotic Overlay Videos -->
         <div class="chaotic-videos">
-            <video class="chaotic-video cv-1" id="hero-cv-1" autoplay muted loop playsinline title="Tattoo art visual overlay - Sage Tel Aviv" aria-label="Abstract tattoo art overlay video at Sage Tattoo Studio Tel Aviv">
-                <source src="assets/videos/2.mp4" type="video/mp4">
-            </video>
-            <video class="chaotic-video cv-2" id="hero-cv-2" autoplay muted loop playsinline title="Tattoo ink and texture overlay - Sage Tel Aviv" aria-label="Tattoo ink texture overlay video at Sage Tattoo Studio in Tel Aviv">
-                <source src="assets/videos/3.mp4" type="video/mp4">
-            </video>
+            <video class="chaotic-video cv-1" id="hero-cv-1" muted loop playsinline preload="none"
+                webkit-playsinline data-index="0" aria-hidden="true"></video>
+            <video class="chaotic-video cv-2" id="hero-cv-2" muted loop playsinline preload="none"
+                webkit-playsinline data-index="1" aria-hidden="true"></video>
         </div>
 
         <div class="hero-content">
-            <img src="assets/logo.png" alt="Sage Tattoo Studio in Tel Aviv - tattoo and piercing shop logo" title="Sage Tattoo Studio - Tel Aviv" class="hero-logo-mark" id="hero-img"
-                width="839" height="847">
-            <h1 class="hero-title">SAGE</h1>
-            <span class="sr-only">Tattoo Studio in Tel Aviv</span>
+            <img src="assets/logo-480.webp"
+                srcset="assets/logo-480.webp 480w, assets/logo-960.webp 960w"
+                sizes="(min-width: 768px) 250px, 60vw"
+                alt="SAGE Tattoo Studio in Tel Aviv — tattoo and piercing shop logo"
+                class="hero-logo-mark" id="hero-img" width="839" height="847" fetchpriority="high"
+                decoding="async">
+            <h1 class="hero-title">SAGE<span class="sr-only"> — Tattoo Studio in Tel Aviv</span></h1>
         </div>
+
         <div class="scroll-indicator">
             <span>SCROLL</span>
             <div class="line"></div>
         </div>
     </header>
 
-    <main>
+    <main id="main">
 
     <!-- 2. About Strip -->
     <section class="about-strip" id="about">
@@ -143,83 +220,300 @@
 
     <!-- 3. Gallery -->
     <section class="gallery-section" id="gallery">
+        <div class="gallery-head">
+            <h2 class="gallery-heading">Our Work<span class="sr-only"> — tattoos done in Tel Aviv</span></h2>
+        </div>
         <div class="marquee-container">
             <div class="marquee-content">
-                <!-- Images will be duplicated for infinite scroll effect -->
-                <img src="assets/logo.png" data-src="assets/images/1.jpg" alt="Bold traditional tattoo by Sage, a tattoo studio in Tel Aviv" title="Tattoo art - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/2.jpg" alt="Intricate linework tattoo at Sage tattoo shop in Tel Aviv-Yaffo" title="Linework tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/3.jpg" alt="Custom tattoo design by Tel Aviv tattoo artist at Sage studio" title="Custom design - Sage Tattoo Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/4.jpg" alt="Black and grey shading tattoo at Sage Tel Aviv tattoo studio" title="Black and grey tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/5.jpg" alt="Tattoo in progress at Sage, a fine art tattoo shop in Tel Aviv" title="Tattoo in progress - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/7.jpg" alt="Portfolio piece from Sage, a Tel Aviv tattoo and piercing studio" title="Portfolio piece - Sage Tattoo Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/8.jpg" alt="Fine line tattoo by Sage, a tattoo in Tel Aviv specialising in detail" title="Fine line tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/9.jpg" alt="Colour tattoo work at Sage tattoo studio in Tel Aviv" title="Colour tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/10.jpg" alt="Detailed ink work by a tattoo artist in Tel Aviv at Sage studio" title="Detailed ink work - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/11.jpg" alt="Japanese-style tattoo at Sage tattoo shop Tel Aviv" title="Japanese-style tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/12.jpg" alt="Floral tattoo design by Sage, a tattoo studio in Tel Aviv-Yaffo" title="Floral tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/13.jpg" alt="Realistic portrait tattoo at Sage Tel Aviv tattoo studio" title="Portrait tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/14.jpg" alt="Minimalist tattoo by a Tel Aviv tattoo artist at Sage studio" title="Minimalist tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/15.jpg" alt="Ornamental tattoo work at Sage, a tattoo in Tel Aviv" title="Ornamental tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/16.jpg" alt="Blackwork tattoo at Sage tattoo shop in Tel Aviv" title="Blackwork tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/17.jpg" alt="Dotwork tattoo by Sage, a Tel Aviv tattoo and fine art gallery" title="Dotwork tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/18.jpg" alt="Tattoo flash art at Sage tattoo studio in Tel Aviv-Yaffo" title="Flash art - Sage Tattoo Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/19.jpg" alt="Neo-traditional tattoo at Sage, a tattoo shop in Tel Aviv" title="Neo-traditional tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/20.jpg" alt="Stipple shading tattoo by a tattoo artist in Tel Aviv at Sage" title="Stipple tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/21.jpg" alt="Ornamental collarbone tattoo at Sage Tel Aviv tattoo studio" title="Ornamental tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/22.jpg" alt="Fine line floral tattoo at Sage, a tattoo studio in Tel Aviv" title="Fine line floral - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/23.jpg" alt="Script lettering tattoo by Sage, a Tel Aviv tattoo shop" title="Script tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/24.jpg" alt="Geometric tattoo at Sage tattoo studio in Tel Aviv" title="Geometric tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/25.jpg" alt="Watercolour-style tattoo at Sage, a tattoo in Tel Aviv-Yaffo" title="Watercolour tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/26.jpg" alt="Micro tattoo detail by a Tel Aviv tattoo artist at Sage studio" title="Micro tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/27.jpg" alt="Large-scale back tattoo at Sage tattoo shop in Tel Aviv" title="Back piece - Sage Tattoo Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/28.jpg" alt="Forearm tattoo by Sage, a tattoo studio in Tel Aviv" title="Forearm tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/29.jpg" alt="Stipple dot tattoo at Sage Tel Aviv tattoo and piercing studio" title="Stipple dotwork - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/30.jpg" alt="Collarbone ornamental tattoo at Sage, a tattoo in Tel Aviv" title="Collarbone tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/31.jpg" alt="Minimalist line tattoo by Sage, a Tel Aviv tattoo studio" title="Minimalist line - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/32.jpg" alt="Detailed sleeve work at Sage tattoo shop in Tel Aviv-Yaffo" title="Sleeve work - Sage Tattoo Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/33.jpg" alt="Nature-inspired tattoo at Sage, a tattoo studio in Tel Aviv" title="Nature tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/34.jpg" alt="Arm tattoo by a Tel Aviv tattoo artist at Sage studio" title="Arm tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/35.jpg" alt="Illustrative tattoo at Sage tattoo shop in Tel Aviv" title="Illustrative tattoo - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/36.jpg" alt="Blackwork sleeve at Sage, a Tel Aviv tattoo and fine art gallery" title="Blackwork sleeve - Sage Tel Aviv" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/37.jpg" alt="Tattoo portfolio highlight from Sage tattoo studio in Tel Aviv" title="Portfolio - Sage Tattoo Tel Aviv" class="lazy">
-                <!-- Duplicated for seamless loop -->
-                <img src="assets/logo.png" data-src="assets/images/1.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/2.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/3.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/4.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/5.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/7.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/8.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/9.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/10.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/11.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/12.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/13.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/14.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/15.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/16.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/17.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/18.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/19.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/20.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/21.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/22.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/23.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/24.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/25.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/26.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/27.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/28.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/29.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/30.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/31.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/32.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/33.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/34.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/35.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/36.jpg" alt="" aria-hidden="true" class="lazy">
-                <img src="assets/logo.png" data-src="assets/images/37.jpg" alt="" aria-hidden="true" class="lazy">
-            </div>
+                <img src="assets/images/1-480.webp"
+                    srcset="assets/images/1-480.webp 480w, assets/images/1-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Bold traditional tattoo by Sage, a tattoo studio in Tel Aviv"
+                    loading="eager" decoding="async"
+                    data-full="assets/images/1-960.webp"
+                    class="lazy">
+                <img src="assets/images/2-480.webp"
+                    srcset="assets/images/2-480.webp 480w, assets/images/2-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1556"
+                    alt="Intricate linework tattoo at Sage tattoo shop in Tel Aviv-Yaffo"
+                    loading="eager" decoding="async"
+                    data-full="assets/images/2-960.webp"
+                    class="lazy">
+                <img src="assets/images/3-480.webp"
+                    srcset="assets/images/3-480.webp 480w, assets/images/3-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Custom tattoo design by Tel Aviv tattoo artist at Sage studio"
+                    loading="eager" decoding="async"
+                    data-full="assets/images/3-960.webp"
+                    class="lazy">
+                <img src="assets/images/4-480.webp"
+                    srcset="assets/images/4-480.webp 480w, assets/images/4-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Black and grey shading tattoo at Sage Tel Aviv tattoo studio"
+                    loading="eager" decoding="async"
+                    data-full="assets/images/4-960.webp"
+                    class="lazy">
+                <img src="assets/images/5-480.webp"
+                    srcset="assets/images/5-480.webp 480w, assets/images/5-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1170"
+                    alt="Tattoo in progress at Sage, a fine art tattoo shop in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/5-960.webp"
+                    class="lazy">
+                <img src="assets/images/7-480.webp"
+                    srcset="assets/images/7-480.webp 480w, assets/images/7-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Portfolio piece from Sage, a Tel Aviv tattoo and piercing studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/7-960.webp"
+                    class="lazy">
+                <img src="assets/images/8-480.webp"
+                    srcset="assets/images/8-480.webp 480w, assets/images/8-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Fine line tattoo by Sage, a tattoo in Tel Aviv specialising in detail"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/8-960.webp"
+                    class="lazy">
+                <img src="assets/images/9-480.webp"
+                    srcset="assets/images/9-480.webp 480w, assets/images/9-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Colour tattoo work at Sage tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/9-960.webp"
+                    class="lazy">
+                <img src="assets/images/10-480.webp"
+                    srcset="assets/images/10-480.webp 480w, assets/images/10-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1406"
+                    alt="Detailed ink work by a tattoo artist in Tel Aviv at Sage studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/10-960.webp"
+                    class="lazy">
+                <img src="assets/images/11-480.webp"
+                    srcset="assets/images/11-480.webp 480w, assets/images/11-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Japanese-style tattoo at Sage tattoo shop Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/11-960.webp"
+                    class="lazy">
+                <img src="assets/images/12-480.webp"
+                    srcset="assets/images/12-480.webp 480w, assets/images/12-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1170"
+                    alt="Floral tattoo design by Sage, a tattoo studio in Tel Aviv-Yaffo"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/12-960.webp"
+                    class="lazy">
+                <img src="assets/images/13-480.webp"
+                    srcset="assets/images/13-480.webp 480w, assets/images/13-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1462"
+                    alt="Realistic portrait tattoo at Sage Tel Aviv tattoo studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/13-960.webp"
+                    class="lazy">
+                <img src="assets/images/14-480.webp"
+                    srcset="assets/images/14-480.webp 480w, assets/images/14-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Minimalist tattoo by a Tel Aviv tattoo artist at Sage studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/14-960.webp"
+                    class="lazy">
+                <img src="assets/images/15-480.webp"
+                    srcset="assets/images/15-480.webp 480w, assets/images/15-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1552"
+                    alt="Ornamental tattoo work at Sage, a tattoo in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/15-960.webp"
+                    class="lazy">
+                <img src="assets/images/16-480.webp"
+                    srcset="assets/images/16-480.webp 480w, assets/images/16-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1554"
+                    alt="Blackwork tattoo at Sage tattoo shop in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/16-960.webp"
+                    class="lazy">
+                <img src="assets/images/17-480.webp"
+                    srcset="assets/images/17-480.webp 480w, assets/images/17-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1561"
+                    alt="Dotwork tattoo by Sage, a Tel Aviv tattoo and fine art gallery"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/17-960.webp"
+                    class="lazy">
+                <img src="assets/images/18-480.webp"
+                    srcset="assets/images/18-480.webp 480w, assets/images/18-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Tattoo flash art at Sage tattoo studio in Tel Aviv-Yaffo"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/18-960.webp"
+                    class="lazy">
+                <img src="assets/images/19-480.webp"
+                    srcset="assets/images/19-480.webp 480w, assets/images/19-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1552"
+                    alt="Neo-traditional tattoo at Sage, a tattoo shop in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/19-960.webp"
+                    class="lazy">
+                <img src="assets/images/20-480.webp"
+                    srcset="assets/images/20-480.webp 480w, assets/images/20-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Stipple shading tattoo by a tattoo artist in Tel Aviv at Sage"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/20-960.webp"
+                    class="lazy">
+                <img src="assets/images/21-480.webp"
+                    srcset="assets/images/21-480.webp 480w, assets/images/21-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1549"
+                    alt="Ornamental collarbone tattoo at Sage Tel Aviv tattoo studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/21-960.webp"
+                    class="lazy">
+                <img src="assets/images/22-480.webp"
+                    srcset="assets/images/22-480.webp 480w, assets/images/22-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1552"
+                    alt="Fine line floral tattoo at Sage, a tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/22-960.webp"
+                    class="lazy">
+                <img src="assets/images/23-480.webp"
+                    srcset="assets/images/23-480.webp 480w, assets/images/23-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Script lettering tattoo by Sage, a Tel Aviv tattoo shop"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/23-960.webp"
+                    class="lazy">
+                <img src="assets/images/24-480.webp"
+                    srcset="assets/images/24-480.webp 480w, assets/images/24-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1170"
+                    alt="Geometric tattoo at Sage tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/24-960.webp"
+                    class="lazy">
+                <img src="assets/images/25-480.webp"
+                    srcset="assets/images/25-480.webp 480w, assets/images/25-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Watercolour-style tattoo at Sage, a tattoo in Tel Aviv-Yaffo"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/25-960.webp"
+                    class="lazy">
+                <img src="assets/images/26-480.webp"
+                    srcset="assets/images/26-480.webp 480w, assets/images/26-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Micro tattoo detail by a Tel Aviv tattoo artist at Sage studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/26-960.webp"
+                    class="lazy">
+                <img src="assets/images/27-480.webp"
+                    srcset="assets/images/27-480.webp 480w, assets/images/27-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Large-scale back tattoo at Sage tattoo shop in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/27-960.webp"
+                    class="lazy">
+                <img src="assets/images/28-480.webp"
+                    srcset="assets/images/28-480.webp 480w, assets/images/28-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Forearm tattoo by Sage, a tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/28-960.webp"
+                    class="lazy">
+                <img src="assets/images/29-480.webp"
+                    srcset="assets/images/29-480.webp 480w, assets/images/29-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Stipple dot tattoo at Sage Tel Aviv tattoo and piercing studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/29-960.webp"
+                    class="lazy">
+                <img src="assets/images/30-480.webp"
+                    srcset="assets/images/30-480.webp 480w, assets/images/30-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Collarbone ornamental tattoo at Sage, a tattoo in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/30-960.webp"
+                    class="lazy">
+                <img src="assets/images/31-480.webp"
+                    srcset="assets/images/31-480.webp 480w, assets/images/31-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1170"
+                    alt="Minimalist line tattoo by Sage, a Tel Aviv tattoo studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/31-960.webp"
+                    class="lazy">
+                <img src="assets/images/32-480.webp"
+                    srcset="assets/images/32-480.webp 480w, assets/images/32-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1558"
+                    alt="Detailed sleeve work at Sage tattoo shop in Tel Aviv-Yaffo"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/32-960.webp"
+                    class="lazy">
+                <img src="assets/images/33-480.webp"
+                    srcset="assets/images/33-480.webp 480w, assets/images/33-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1553"
+                    alt="Nature-inspired tattoo at Sage, a tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/33-960.webp"
+                    class="lazy">
+                <img src="assets/images/34-480.webp"
+                    srcset="assets/images/34-480.webp 480w, assets/images/34-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Arm tattoo by a Tel Aviv tattoo artist at Sage studio"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/34-960.webp"
+                    class="lazy">
+                <img src="assets/images/35-480.webp"
+                    srcset="assets/images/35-480.webp 480w, assets/images/35-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1170"
+                    alt="Illustrative tattoo at Sage tattoo shop in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/35-960.webp"
+                    class="lazy">
+                <img src="assets/images/36-480.webp"
+                    srcset="assets/images/36-480.webp 480w, assets/images/36-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Blackwork sleeve at Sage, a Tel Aviv tattoo and fine art gallery"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/36-960.webp"
+                    class="lazy">
+                <img src="assets/images/37-480.webp"
+                    srcset="assets/images/37-480.webp 480w, assets/images/37-960.webp 960w"
+                    sizes="(max-width: 767px) 78vw, 320px"
+                    width="1170" height="1560"
+                    alt="Tattoo portfolio highlight from Sage tattoo studio in Tel Aviv"
+                    loading="lazy" decoding="async"
+                    data-full="assets/images/37-960.webp"
+                    class="lazy">
+                </div>
         </div>
     </section>
 
@@ -244,7 +538,7 @@
                 <a href="https://search.google.com/local/writereview?placeid=ChIJ_4lpuhJNHRURtDYa6DsDadI"
                     target="_blank" rel="noopener noreferrer" class="reviews-link reviews-link-primary">Leave us a
                     Google Review</a>
-                <a href="https://www.google.com/search?sca_esv=6b5dfc5de771b6b8&sxsrf=APpeQnsbZ5VQOt1JPU9X6MDfKReOoJw6sg:1786631515437&q=sage+tattoo+shop+reviews&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xEwMsu05qP4xdKJ-lCBWgPrTpPdOi1yiAIwYSbW3Z_Vu0FqLfimEEIglsMB_Bo0LrmYYciYhRrLJbVbr1u4eVJQ0gkpFRvlDQSYQEGD58ZIdprEyw%3D%3D&sa=X&ved=2ahUKEwjruMmG6Z2WAxVJhv0HHWivD5UQ9qsLegQIFxAG&biw=412&bih=915&dpr=3.5#ebo=1"
+                <a href="https://search.google.com/local/reviews?placeid=ChIJ_4lpuhJNHRURtDYa6DsDadI"
                     target="_blank" rel="noopener noreferrer" class="reviews-link">See all Google Reviews</a>
                 <button type="button" class="reviews-nav reviews-next" id="reviews-next"
                     aria-label="Next reviews">&#10095;</button>
@@ -261,7 +555,7 @@
                     <div class="progress-indicator" id="progress-indicator"></div>
                 </div>
                 <div class="progress-text-container">
-                    <span class="progress-text" id="progress-text">1/4</span>
+                    <span class="progress-text" id="progress-text" aria-live="polite">Step 1 of 4</span>
                 </div>
 
                 <form id="booking-form">
@@ -277,6 +571,7 @@
                             <button type="button" class="chip" data-value="Neck">Neck</button>
                             <button type="button" class="chip" data-value="Other">Other</button>
                         </div>
+                        <label for="placement-other" class="sr-only">Where else on the body?</label>
                         <input type="text" id="placement-other" class="text-input hidden"
                             placeholder="Specify placement...">
                         <div class="form-actions">
@@ -303,8 +598,9 @@
                     <div class="form-step" id="step-3">
                         <h3>Your Name</h3>
                         <div class="input-group">
+                            <label for="client-name" class="sr-only">Your name</label>
                             <input type="text" id="client-name" class="text-input" placeholder="Enter your name"
-                                required>
+                                autocomplete="name" required>
                         </div>
                         <div class="form-actions">
                             <button type="button" class="btn btn-outline prev-btn">Back</button>
@@ -336,7 +632,7 @@
             <div class="contact-info">
                 <h2 class="section-title">CONTACT</h2>
                 <div class="contact-details">
-                    <address class="address">Eilat Street 22<br>Tel Aviv-Yaffo</address>
+                    <address class="address">SAGE Tattoo Studio<br>Eilat Street 22<br>Tel Aviv-Yaffo</address>
                     <p class="powered-by">Powered by SAGE</p>
 
                     <div class="contact-methods">
@@ -371,10 +667,13 @@
             </div>
             <div class="map-container">
                 <iframe
+                    title="Map showing SAGE Tattoo Studio, Eilat Street 22, Tel Aviv-Yaffo"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.144976787948!2d34.76214307559135!3d32.05710607396655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b79decfccb87%3A0xb3cf51d275fcfa13!2sEilat%20St%2022%2C%20Tel%20Aviv-Yafo!5e0!3m2!1sen!2sil!4v1714470000000!5m2!1sen!2sil"
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
+                <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&destination=Eilat+St+22,+Tel+Aviv-Yafo"
+                    target="_blank" rel="noopener noreferrer">Get directions</a>
             </div>
         </div>
     </section>
@@ -384,13 +683,14 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-inner">
-            <div class="footer-brand">SAGE</div>
+            <div class="footer-brand">SAGE<span class="sr-only"> Tattoo Studio</span></div>
             <div class="footer-columns">
                 <nav class="footer-col" aria-label="Footer navigation">
                     <h3 class="footer-heading">Navigation</h3>
                     <a href="index.html" class="footer-link">Home</a>
                     <a href="#artists" class="footer-link">Artists</a>
                     <a href="#contact" class="footer-link">Contact</a>
+                    <a href="privacy.html" class="footer-link">Privacy</a>
                     <a href="sitemap.xml" class="footer-link">Sitemap</a>
                 </nav>
                 <div class="footer-col">
@@ -420,22 +720,27 @@
     </a>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <button id="lightbox-close" class="lightbox-close">&times;</button>
-        <button id="lightbox-prev" class="lightbox-nav lightbox-prev">&#10094;</button>
-        <img id="lightbox-img" class="lightbox-img" src="" alt="Tattoo artwork by Sage Tattoo Studio Tel Aviv" title="Tattoo artwork - Sage Tattoo Studio Tel Aviv">
-        <button id="lightbox-next" class="lightbox-nav lightbox-next">&#10095;</button>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Tattoo gallery viewer"
+        aria-hidden="true">
+        <button id="lightbox-close" class="lightbox-close" aria-label="Close gallery">&times;</button>
+        <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous tattoo">&#10094;</button>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Tattoo artwork by SAGE Tattoo Studio Tel Aviv">
+        <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next tattoo">&#10095;</button>
     </div>
 
-    <!-- Cookie Policy Banner -->
-    <div id="cookie-banner" class="cookie-banner hidden" role="region" aria-label="Cookie Policy Notice">
+    <!-- Cookie / analytics consent -->
+    <div id="cookie-banner" class="cookie-banner hidden" role="region" aria-label="Analytics consent">
         <div class="cookie-content">
-            <p>We use cookies and Google Analytics to enhance your browsing experience.</p>
-            <button id="cookie-accept-btn" class="cookie-btn">OK</button>
+            <p>We'd like to use Google Analytics to understand how people find the studio.
+                Nothing loads until you choose. <a href="privacy.html" class="cookie-link">Privacy policy</a>.</p>
+            <div class="cookie-actions">
+                <button id="cookie-accept-btn" class="cookie-btn">Accept</button>
+                <button id="cookie-decline-btn" class="cookie-btn cookie-btn-ghost">Decline</button>
+            </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20261125i"></script>
 </body>
 
 </html>
